@@ -46,7 +46,7 @@ class RegisterController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed|min:8',
-            'role' => 'required|in:user,organizer', // Ensure role is either 'user' or 'organizer'
+            'role' => 'required|in:user,organizer',
         ]);
 
         // Database Insert
