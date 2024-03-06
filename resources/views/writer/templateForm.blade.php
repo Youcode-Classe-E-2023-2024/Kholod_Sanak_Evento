@@ -1,96 +1,173 @@
-<?php
-?>
-    <!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>template form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Form Title</title>
+    <!-- Add your CSS stylesheets or include a stylesheet framework (e.g., Tailwind CSS) -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.tiny.cloud/1/n64ewxquxuxobze709rvafjp8ulg7yb862ijwsnictzy3u0n/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-    <!-- Initialize TinyMCE -->
-    <script>
-        tinymce.init({
-            selector: '#myTextarea',
-            plugins: 'advlist autolink lists link image charmap print preview anchor',
-            toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | image',
-            automatic_uploads: true,
-            file_picker_types: 'image',
-            file_picker_callback: function(callback, value, meta) {
-                // Open a dialog to prompt the user to enter the image filename or URL
-                var imageUrl = prompt('Enter the image URL');
-
-                // Check if imageUrl is not null and not an empty string
-                if (imageUrl !== null && imageUrl.trim() !== "") {
-                    // Join the entered image URL with the base prompt URL
-                    var fullImageUrl = 'http://127.0.0.1:8000/storage/' + imageUrl;
-
-                    // Call the callback function with the full image URL
-                    callback(fullImageUrl, { text: imageUrl });
-                }
-            }
-        });
-
-    </script>
-
 </head>
+
 <body>
-<div class="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
-    <div class="container max-w-screen-lg mx-auto">
-        <div>
-            <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
-                <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
-                    <div class="text-gray-600">
-                        <p class="font-medium text-lg">Template Form</p>
-                    </div>
-                    <!-- Template title -->
-                    <div class="lg:col-span-2">
 
-                        <form method="post" enctype="multipart/form-data"
-                              action="{{route('save_newsletter_template')}}">
-                            @csrf
+<form action="{{ route('events.store') }}" method="POST" enctype="multipart/form-data"
+      class="max-w-screen-md mx-auto mt-8 p-6 bg-gray-100 rounded-md shadow-md">
 
-                            <div class="grid gap-4 gap-y-2 text-sm ">
-{{--                                template title--}}
-                                <div class="md:col-span-3">
-                                    <label for="title">Template Title</label>
-                                    <input type="text" id="titre" name="titre" placeholder="Enter your Product Name"
-                                           class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"/>
-                                </div>
 
-                                <!-- content -->
-                                <div class="md:col-span-3">
-                                    <textarea id="myTextarea" name="contenu"></textarea>
+    @csrf
+    <div class="text-3xl text-red-900 pt-5 mb-10 text-center font-bold">Ajouter un evenement</div>
 
-                                </div>
-                            </div>
-                            <!-- Submit button-->
-                            <div class="md:col-span-5 text-right">
-                                <div class="inline-flex items-end">
-                                    <button  id="save"
-                                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                        Submit
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+    <div class="-mx-3 flex flex-wrap">
+        <input type="hidden" name="id">
+        <div class="w-full px-3 sm:w-1/2">
+            <div class="mb-5">
+                <label for="titre" class="mb-3 block text-base font-medium text-[#07074D]">
+                    Titre
+                </label>
+                @error('title')
+                <div class="text-red-500">{{ $message }}</div>
+                @enderror
+                <input type="text" name="title" placeholder="Titre"
+                       class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md">
+            </div>
+        </div>
 
-                    </div>
+        <div class="w-full px-3 sm:w-1/2">
+            <div class="mb-5">
+                <label for="media" class="mb-3 block text-base font-medium ">
+                    Category
+                </label>
+                @error('category')
+                <div class="text-red-500">{{ $message }}</div>
+                @enderror
+                <div class="rounded-md border border-[#e0e0e0] p-1 py-1 bg-white outline-none flex">
+                    <select class="rounded w-full pb-2 py-2 px-4 placeholder-gray-500 outline-none" name="category"
+                            id="">
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="-mx-3 flex flex-wrap">
+        <input type="hidden" name="id">
+        <div class="w-full px-3 sm:w-1/3">
+            <div class="mb-5">
+                <label for="titre" class="mb-3 block text-base font-medium text-[#07074D]">
+                    Prix
+                </label>
+                @error('price')
+                <div class="text-red-500">{{ $message }}</div>
+                @enderror
+                <input type="number" name="price" placeholder="Prix"
+                       class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md">
+            </div>
+        </div>
+
+        <div class="w-full px-3 sm:w-1/3">
+            <div class="mb-5">
+                <label for="media" class="mb-3 block text-base font-medium ">
+                    Lieu
+                </label>
+                @error('lieu')
+                <div class="text-red-500">{{ $message }}</div>
+                @enderror
+                <div class="rounded-md border border-[#e0e0e0] p-1 py-1 bg-white outline-none flex">
+                    <select class="rounded w-full pb-2 py-2 px-4 placeholder-gray-500 outline-none" name="lieu"
+                            id="">
+                        @foreach($cities as $city)
+                            <option value="{{ $city->id }}">{{ $city->ville }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
         </div>
 
+        <div class="w-full px-3 sm:w-1/3">
+            <div class="mb-5">
+                <label for="media" class="mb-3 block text-base font-medium ">
+                    Nombre de place
+                </label>
+                @error('place')
+                <div class="text-red-500">{{ $message }}</div>
+                @enderror
+                <input type="number" name="place" placeholder="Nombre de place"
+                       class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md">
+            </div>
+        </div>
 
-        <a href="{{ route('template') }}"  class="md:absolute  bottom-0 left-0 p-10 ">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none"
-                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M19 12H5M12 19l-7-7 7-7"></path>
-            </svg>
-
-        </a>
     </div>
-</div>
+
+    <div class="-mx-3 flex flex-wrap">
+
+        <input type="hidden" name="id">
+        <div class="w-full px-3 sm:w-1/3">
+            <div class="mb-5">
+                <label class="mb-3 block text-base font-medium text-[#07074D]">
+                    Image
+                </label>
+                @error('image')
+                <div class="text-red-500">{{ $message }}</div>
+                @enderror
+                <input type="file" name="image[]" placeholder="Description"
+                       class="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md">
+            </div>
+        </div>
+
+        <div class="w-full px-3 sm:w-1/3">
+            <div class="mb-5">
+                <label for="media" class="mb-3 block text-base font-medium ">
+                    Date de l'evenement
+                </label>
+                @error('deadline')
+                <div class="text-red-500">{{ $message }}</div>
+                @enderror
+                <input type="date" name="deadline" placeholder="Jour de l'evenement"
+                       class="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md">
+            </div>
+        </div>
+
+        <div class="w-full px-3 sm:w-1/3">
+            <div class="mb-5">
+                <label for="reservation_type" class="block text-base font-medium mb-3">
+                    Reservation Type
+                </label>
+                <select name="reservation_type"
+                        class="block w-full py-2 px-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+                    <option value="automatic">Automatic</option>
+                    <option value="manual">Manual</option>
+                </select>
+            </div>
+        </div>
+
+    <div class=" w-full">
+        <label class="mb-3 block text-base font-medium text-[#07074D]">
+            Description
+        </label>
+        @error('description')
+        <div class="text-red-500">{{ $message }}</div>
+        @enderror
+        <textarea name="description" placeholder="Description"
+               class="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md">
+        </textarea>
+    </div>
+    </div>
+
+
+
+    <div class="my-10">
+        <button type="submit" name="submit"
+                class="hover:shadow-form rounded-md bg-gray-100 py-3 px-8 text-center text-base font-semibold w-full border-2 outline-none">
+            Submit
+        </button>
+    </div>
+
+</form>
+
 </body>
+
 </html>
