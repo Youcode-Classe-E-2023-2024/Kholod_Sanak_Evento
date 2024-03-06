@@ -37,10 +37,16 @@
                 <div class="mb-4">
                     <label class="block mb-1" for="email">Email-Address</label>
                     <input id="email" type="text" name="email" class="py-2 px-3 border border-gray-300 focus:border-red-300 focus:outline-none focus:ring focus:ring-red-200 focus:ring-opacity-50 rounded-md shadow-sm disabled:bg-gray-100 mt-1 block w-full" />
+                    @error('email')
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="mb-4">
                     <label class="block mb-1" for="password">Password</label>
                     <input id="password" type="password" name="password" class="py-2 px-3 border border-gray-300 focus:border-red-300 focus:outline-none focus:ring focus:ring-red-200 focus:ring-opacity-50 rounded-md shadow-sm disabled:bg-gray-100 mt-1 block w-full" />
+                    @error('password')
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
                 </div>
 {{--                remember me--}}
                 <div class="mt-6 flex items-center justify-between">
