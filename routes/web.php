@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -143,20 +144,27 @@ Route::post('/logout', [Logoutcontroller::class, 'destroy'])->name('logout')
 |                                Admin Dashboard
 |--------------------------------------------------------------------------
 */
-//redirect admin to the dashboard admin
-//Route::get('/adminDashboard', function () {
-//    return view('admin.dashboard');
-//})->name('adminDashboard')->middleware('auth', 'role:admin');
+
 Route::get('/admin/dashboard', [UserController::class, 'adminDashboard'])->name('adminDashboard')->middleware('auth', 'role:admin');
+///////////////////////////    Events
+Route::get('/events/admin',[EventController::class,'aprroveEvent'])->name('events.admin')->middleware('auth', 'role:admin');
+Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('events.destroy')->middleware('auth', 'role:admin');
+Route::post('/events/{event}/approve', [EventController::class, 'approve'])->name('events.approve')->middleware('auth', 'role:admin');
+
 
 /*
 |--------------------------------------------------------------------------
 |                                Admin Actions
 |-----------------------------------------------------------------
 */
+
 Route::middleware('auth', 'role:admin')->group(function () {
+
+
+
     ////////////////////            users list                ///////////////////////////////
     Route::get('/usersList', [UserController::class, 'index'])->name('usersList');
+
     ////////////////////            categories list                ///////////////////////////////
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
     Route::post('/add-category', [CategoryController::class, 'store'])->name('add_category');
@@ -168,33 +176,19 @@ Route::middleware('auth', 'role:admin')->group(function () {
 
     ////////////////////            change users role                ///////////////////////////////
     Route::put('/users/{user}', [UserController::class, 'update'])->name('updateUserRole');
-
     /////////////////////////          SOFT DELETE             ////////////////////////////////
     Route::delete('/users/{userId}', [UserController::class, 'destroy'])->name('users.destroy');
-
     //restore users interface
     Route::get('/admin/restored-users', [UserController::class, 'trashed'])->name('restore');
     //restore method
     Route::put('/users/{userId}/restore', [UserController::class, 'restore'])->name('users.restore');
 
 
-    //////////////////////////           Show subs          //////////////////////////////////////////
-   Route::get('/subsList', [EmailListController::class, 'showSubscribers'])->name('subsList');
 
-    //Route::view('/subsList', 'admin.subs')->name('subsList');
-    //Route::view('/templates', 'admin.template')->name('templates');
 
-    ////////////////////////       Templates display      ////////////////////////////////////////
-    Route::get('/templates', [NewsletterController::class, 'view'])->name('templates');
-    Route::post('add/template', [NewsletterController::class, 'saveAdmin'])->name('save_template');
 
-    //template form
-    Route::view('/templateForm', 'writer.templateForm')->name('addTemplate');
-    //send template
-    Route::post('/newsletter/send/{id}', [NewsletterController::class,'sendAdmin'])->name('send_newsletter_template');
 
-    //soft delete template
-    Route::post('delete/template/{id}', [NewsletterController::class, 'deleteNewsletter'])->name('delete_template');
+
 
 
 });
@@ -206,14 +200,10 @@ Route::middleware('auth', 'role:admin')->group(function () {
 
 /*
 |--------------------------------------------------------------------------
-|                                Writer Dashboard
+|                                Organizer Dashboard
 |--------------------------------------------------------------------------
 */
-//redirect editor to the dashboard writer
-//Route::get('/writerDashboard', function () {
-//    return view('writer.dashboard');
-//})->name('writerDashboard')->middleware('auth', 'role:editor');
-Route::get('/writer/dashboard', [UserController::class, 'editorDashboard'])->name('writerDashboard')->middleware('auth', 'role:organizer');
+Route::get('/organizer/dashboard', [UserController::class, 'editorDashboard'])->name('writerDashboard')->middleware('auth', 'role:organizer');
 
 /*
 |--------------------------------------------------------------------------
@@ -221,44 +211,17 @@ Route::get('/writer/dashboard', [UserController::class, 'editorDashboard'])->nam
 |--------------------------------------------------------------------------
 */
 
-Route::middleware(['auth', 'can:create templates', 'can:send templates', 'can:track templates',
-    'can:add medias', 'can:download users'])->group(function () {
+Route::middleware(['auth', 'role:organizer'])->group(function () {
 
-    /////////////////////////              ADD    MEDIA                    ///////////////////////////////
-    Route::post('/upload', [MediaController::class, 'upload'])->name('upload');
-    //Route::post('/uploadImage', [MediaController::class, 'store'])->name('uploadImage');
-
-    // form to add media
-     Route::get('/AddMedia', [MediaController::class, 'index'])->name('addMedia');
-    // For rendering the upload form
-    //Route::get('/media/upload', [MediaController::class,'showMediaForm'])->name('media.upload');
-
-    // index page of lists of medias
-    Route::get('/medias', [MediaController::class,'showMediaList'])->name('media');
-    //delete media
-    Route::delete('/media/{id}', [MediaController::class,'destroy'])->name('media.delete');
-
-
-    ////////////////////////////////           Display subs           ////////////////////////////////////////
-    Route::get('/subscribers', [EmailListController::class, 'showSubscribers'])->name('subscribers');
-    //generate pdf
-    Route::get('/generate-pdf', [PdfController::class, 'generatePdf'])->name('generate.pdf');
-
-
-
-    // Route::view('/writerSubsList', 'writer.subs')->name('writerSubsList');
-
-    //////////////////////////////             Create newsletter             /////////////////////////////////////
-    Route::post('add/template', [NewsletterController::class, 'save'])->name('save_newsletter_template');
-    // show lists of template
-    Route::get('/template', [NewsletterController::class, 'index'])->name('template');
+    /////////////////////////              ADD & Display Events                  ///////////////////////////////
+    Route::get('/events',[EventController::class,'index'])->name('events.organizer');
+    Route::post('/events', [EventController::class, 'store'])->name('events.store');
 
     //template form
-    Route::view('/templateForm', 'writer.templateForm')->name('addTemplate');
-    //send template
-    Route::post('/newsletter/send/{id}', [NewsletterController::class,'send'])->name('send_newsletter_template');
+    Route::get('/eventForm', [EventController::class,'showEventForm'])->name('addEvent');
 
-    //Route::post('/send/test', [NewsletterController::class,'sendTry'])->name('test');
+
+
 });
 
 
