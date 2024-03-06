@@ -182,9 +182,14 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+
         /*
          * Package Service Providers...
          */
+        Spatie\Permission\PermissionServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
+
+
 
         /*
          * Application Service Providers...
@@ -207,9 +212,11 @@ return [
     | the aliases are "lazy" loaded so they don't hinder performance.
     |
     */
+    'PDF' => Barryvdh\DomPDF\Facade::class,
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
+
 
 ];
