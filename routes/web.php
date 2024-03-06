@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -156,6 +157,14 @@ Route::get('/admin/dashboard', [UserController::class, 'adminDashboard'])->name(
 Route::middleware('auth', 'role:admin')->group(function () {
     ////////////////////            users list                ///////////////////////////////
     Route::get('/usersList', [UserController::class, 'index'])->name('usersList');
+    ////////////////////            categories list                ///////////////////////////////
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
+    Route::post('/add-category', [CategoryController::class, 'store'])->name('add_category');
+    Route::delete('/delete-category/{id}', [CategoryController::class, 'deleteCategory'])->name('delete_category');
+    Route::post('/update_category/{id}', [CategoryController::class, 'update'])->name('update_category');
+
+
+
 
     ////////////////////            change users role                ///////////////////////////////
     Route::put('/users/{user}', [UserController::class, 'update'])->name('updateUserRole');
