@@ -20,6 +20,10 @@
         <div class="mb-10">
             <h1 class="text-center font-bold text-xl uppercase">Secure payment info</h1>
         </div>
+
+        <form action="{{ route('reservation.store') }}" method="post">
+            @csrf
+            <input type="hidden" name="event_id" value="{{ $event->id }}">
         <div class="mb-3 flex -mx-2">
 
             <div class="px-2">
@@ -39,7 +43,7 @@
         <div class="mb-3">
             <label class="font-bold text-sm mb-2 ml-1">Your Email</label>
             <div>
-                <input class="w-full px-3 py-2 mb-1 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 transition-colors" placeholder="your email" type="email"/>
+                <input name="email" class="w-full px-3 py-2 mb-1 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 transition-colors" placeholder="your email" type="email"/>
             </div>
         </div>
         <div class="mb-3">
@@ -98,6 +102,7 @@
         <div>
             <button class="block w-full max-w-xs mx-auto bg-pink-600 hover:bg-pink-700 focus:bg-pink-700 text-white rounded-lg px-3 py-3 font-semibold"><i class="mdi mdi-lock-outline mr-1"></i> PAY NOW</button>
         </div>
+        </form>
     </div>
 </div>
 
