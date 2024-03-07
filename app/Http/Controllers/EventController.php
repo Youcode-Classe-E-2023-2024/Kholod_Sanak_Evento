@@ -45,9 +45,8 @@ class EventController extends Controller
             'price' => 'required|numeric',
             'place' => 'required|numeric',
             'description' => 'required|string',
-            'image' => 'required',
+            'image' => 'required|image', // Assuming 'image' is an uploaded image file
             'deadline' => 'required|date',
-            'image.*' => 'image',
             'reservation_type' => 'required|in:automatic,manual'
         ]);
 
@@ -55,25 +54,24 @@ class EventController extends Controller
         $user = Auth::user();
 
         // Create a new Event instance
-        $event = new Event([
+        $event = Event::create([
             'titre' => $validatedData['title'],
             'description' => $validatedData['description'],
             'created_by' => $user->id,
             'prix' => $validatedData['price'],
             'nombre_place' => $validatedData['place'],
             'ville_id' => $validatedData['lieu'],
-            'deadline' => Carbon::parse($validatedData['deadline'])->toDateString(), // Format the date
-            'category_id' => $validatedData['category']
+            'deadline' => Carbon::parse($validatedData['deadline'])->toDateString(),
+            'category_id' => $validatedData['category'],
         ]);
+
         // Store the uploaded image using Spatie Media Library
-        foreach ($request->file('image') as $file) {
-            $storedFile = $file->store('uploads');
+        $file = $request->file('image');
+        $media = $event->addMedia($file)->toMediaCollection();
 
-            $media = $event->addMedia(storage_path('app/' . $storedFile))->toMediaCollection();
+        // Set the media ID in the id_image column
+        $event->id_image = $media->id;
 
-            $event->id_image = $media->id;
-            $event->save();
-        }
         // Set status based on reservation type
         $event->status = $validatedData['reservation_type'] === 'automatic' ? 1 : 0;
 
@@ -83,6 +81,19 @@ class EventController extends Controller
         // Redirect or return a response
         return redirect()->route('events.organizer')->with('success', 'Event created successfully.');
     }
+
+
+    public function destroyOrganizer(Event $event)
+   {
+        if (Auth::id() !== $event->created_by) {
+            return redirect()->back()->with('error', 'You are not authorized to delete this event.');
+        }
+
+        $event->delete();
+
+        return redirect()->route('events.organizer')->with('success', 'Event deleted successfully.');
+   }
+
 
     /////////////////////////////           Admin             ////////////////////////////
     public function aprroveEvent(){
