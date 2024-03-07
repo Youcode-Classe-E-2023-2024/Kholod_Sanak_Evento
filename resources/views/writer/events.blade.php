@@ -40,14 +40,17 @@
                     <th class="border-b border-blue-gray-50 py-3 px-6 text-left">
                         <p class="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400">Events</p>
                     </th>
-                    <th class="border-b border-blue-gray-50 py-3 px-6 text-left">
-                        <p class="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400">Deadline</p>
-                    </th>
+{{--                    <th class="border-b border-blue-gray-50 py-3 px-6 text-left">--}}
+{{--                        <p class="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400">Deadline</p>--}}
+{{--                    </th>--}}
                     <th class="border-b border-blue-gray-50 py-3 px-6 text-left">
                         <p class="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400">Status</p>
                     </th>
                     <th class="border-b border-blue-gray-50 py-3 px-6 text-left">
                         <p class="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400">Acceptation</p>
+                    </th>
+                    <th class="border-b border-blue-gray-50 py-3 px-6 text-left">
+                        <p class="block antialiased font-sans text-[11px] font-medium uppercase text-blue-gray-400">Actions</p>
                     </th>
                 </tr>
                 </thead>
@@ -57,9 +60,9 @@
                         <td class="py-3 px-5 border-b border-blue-gray-50">
                             <p class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-bold">{{ $event->titre }}</p>
                         </td>
-                        <td class="py-3 px-5 border-b border-blue-gray-50">
-                            <p class="block antialiased font-sans text-xs font-medium text-blue-gray-600">{{ $event->deadline }}</p>
-                        </td>
+{{--                        <td class="py-3 px-5 border-b border-blue-gray-50">--}}
+{{--                            <p class="block antialiased font-sans text-xs font-medium text-blue-gray-600">{{ $event->deadline }}</p>--}}
+{{--                        </td>--}}
                         <td class="py-3 px-5 border-b border-blue-gray-50">
                             <p class="block antialiased font-sans text-xs font-medium text-blue-gray-600">
                                 {{ $event->status == 1 ? 'Automatic' : 'Manual' }}
@@ -74,12 +77,22 @@
                                 @endif
                             </p>
                         </td>
+                        <td class="py-3 px-5 border-b border-blue-gray-50">
+                            <div class="flex gap-2">
+                                <a href="#" class="mt-2 px-2 py-1 bg-blue-500 text-white font-bold rounded hover:bg-blue-700 cursor-pointer">Edit</a>
+                                <form method="post" action="#">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="mt-2 px-2 py-1 bg-red-500 text-white font-bold rounded hover:bg-red-700 cursor-pointer">Delete</button>
+                                </form>
+                            </div>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
 
-                            {{ $events->links() }}
+            {{ $events->links() }}
 
 
 
