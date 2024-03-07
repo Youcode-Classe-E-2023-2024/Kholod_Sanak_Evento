@@ -67,7 +67,11 @@
                         </td>
                         <td class="py-3 px-5 border-b border-blue-gray-50">
                             <p class="block antialiased font-sans text-xs font-medium text-blue-gray-600">
-                                {{ $event->acceptation == 1 ? 'Published' : 'Pending' }}
+                                @if ($event->trashed())
+                                    Declined
+                                @else
+                                    {{ $event->acceptation == 1 ? 'Published' : 'Pending' }}
+                                @endif
                             </p>
                         </td>
                     </tr>
