@@ -11,21 +11,17 @@ use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
-    public function index(){
-        $events = Event::latest()->paginate(10);
+    public function index()
+    {
+        $events = Event::withTrashed()->latest()->paginate(10);
 
-        return view('writer.events',[
-            'events'=>$events
-        ]);
+        return view('writer.events', ['events' => $events]);
     }
 
-    public function aprroveEvent(){
-        $events = Event::latest()->paginate(10);
-
-        return view('admin.events',[
-            'events'=>$events
-        ]);
+    public function stat(){
+        $events = Event::all()->count();
     }
+
 
 
     public function showEventForm()
@@ -58,7 +54,6 @@ class EventController extends Controller
         // Get the authenticated user
         $user = Auth::user();
 
-
         // Create a new Event instance
         $event = new Event([
             'titre' => $validatedData['title'],
@@ -90,6 +85,14 @@ class EventController extends Controller
     }
 
     /////////////////////////////           Admin             ////////////////////////////
+    public function aprroveEvent(){
+        $events = Event::latest()->paginate(10);
+
+        return view('admin.events',[
+            'events'=>$events
+        ]);
+    }
+
     public function destroy(Event $event)
     {
         $event->delete();
