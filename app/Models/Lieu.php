@@ -10,4 +10,13 @@ class Lieu extends Model
     use HasFactory;
     protected $table = 'lieu';
 
+    protected $fillable = [
+        'ville'
+    ];
+
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
+
 }

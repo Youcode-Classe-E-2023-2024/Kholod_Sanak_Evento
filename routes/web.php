@@ -36,13 +36,13 @@ use App\Http\Controllers\UserController;
 |                       Emails Pages redirect
 |--------------------------------------------------------------------------
 */
-Route::get('/unsubscribe/success', function () {
-    return view('unsubscribe.success');
-})->name('unsubscribe.success');
-
-Route::get('/unsubscribe/error', function () {
-    return view('unsubscribe.error');
-})->name('unsubscribe.error');
+//Route::get('/unsubscribe/success', function () {
+//    return view('unsubscribe.success');
+//})->name('unsubscribe.success');
+//
+//Route::get('/unsubscribe/error', function () {
+//    return view('unsubscribe.error');
+//})->name('unsubscribe.error');
 
 //success page email has been sent
 Route::get('/reset-password/success', function () {
@@ -55,21 +55,18 @@ Route::get('/reset-password/success', function () {
 |                                Homepage
 |--------------------------------------------------------------------------
 */
-Route::get('/', function () {
+Route::get('/home', function () {
     return view('home');
 })->name('home');
-//Route::get('/home',[NewsletterController::class, 'index'])->name('home');
+
+Route::get('/ticketForm', function () {
+    return view('event.ticketForm');
+})->name('ticketForm');
 
 
-/*
-|--------------------------------------------------------------------------
-|                        Subscription and Unsubscription
-|--------------------------------------------------------------------------
-*/
-Route::post('/subscribe',[NewsletterController::class,'subscribe']);
-Route::post('/unsubscribe', [NewsletterController::class, 'unsubscribe'])->name('unsubscribe');
-Route::get('/unsubscribe/{token}',  [NewsletterController::class, 'unsubscribe'])->name('unsubscribe');
-
+Route::get('/', [EventController::class,'affiche'])->name('welcome');
+//display single page
+Route::get('events/{id}', [EventController::class, 'show'])->name('event.single');
 
 
 

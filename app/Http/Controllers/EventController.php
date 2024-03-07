@@ -8,9 +8,16 @@ use App\Models\Lieu;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Termwind\Components\Li;
 
 class EventController extends Controller
 {
+
+    /*
+    |--------------------------------------------------------------------------
+    |                                Organizer
+    |--------------------------------------------------------------------------
+    */
     public function index()
     {
         $events = Event::withTrashed()->latest()->paginate(10);
@@ -158,7 +165,11 @@ class EventController extends Controller
 
 
 
-    /////////////////////////////           Admin             ////////////////////////////
+    /*
+    |--------------------------------------------------------------------------
+    |                                Admin
+    |--------------------------------------------------------------------------
+    */
     public function aprroveEvent(){
         $events = Event::latest()->paginate(10);
 
@@ -178,4 +189,29 @@ class EventController extends Controller
         $event->update(['acceptation' => 1]);
         return redirect()->back()->with('success', 'Event approved successfully.');
     }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    |                                User
+    |--------------------------------------------------------------------------
+    */
+
+    public function affiche()
+    {
+        $events = Event::where('acceptation', 1)->latest()->paginate(10);
+        $categories = Category::all();
+        $cities = Lieu::all();
+
+        return view("welcome", compact('events', 'categories', 'cities'));
+    }
+
+
+    public function show($id)
+    {
+        $event = Event::find($id);
+
+        return view('event.single', compact('event'));
+    }
+
 }

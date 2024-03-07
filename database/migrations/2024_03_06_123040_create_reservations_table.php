@@ -16,11 +16,10 @@ return new class extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-
             // Foreign key for event_id referencing the 'id' column on the 'events' table
             $table->foreignId('event_id')->constrained();
-
             $table->tinyInteger('status')->default(0);
+            $table->string('email');
             $table->timestamps();
         });
     }

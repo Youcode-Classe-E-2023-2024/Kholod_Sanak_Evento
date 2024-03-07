@@ -28,4 +28,14 @@ class Event extends Model implements HasMedia
         'acceptation'
     ];
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function lieu()
+    {
+        return $this->belongsTo(Lieu::class, 'ville_id');
+    }
+
 }
