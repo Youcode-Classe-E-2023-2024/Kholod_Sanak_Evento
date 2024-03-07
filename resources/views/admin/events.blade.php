@@ -60,7 +60,7 @@
                         </td>
                         <td class="py-3 px-5 border-b border-blue-gray-50">
                             <div class="flex gap-2">
-                                <form method="post" action="{{ route('events.destroy', $event->id) }}">
+                                <form method="post" action="{{ route('event.destroy', $event->id) }}">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="mt-2 px-2 py-1 bg-red-500 text-white font-bold rounded hover:bg-red-700 cursor-pointer">
