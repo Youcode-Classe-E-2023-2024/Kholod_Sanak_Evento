@@ -63,20 +63,20 @@
                                 <form method="post" action="{{ route('event.destroy', $event->id) }}">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="mt-2 px-2 py-1 bg-red-500 text-white font-bold rounded hover:bg-red-700 cursor-pointer">
+                                    <button id="declineBtn{{$event->id}}" type="submit" onclick="hideButton('declineBtn{{$event->id}}', event)" class="mt-2 px-2 py-1 bg-red-500 text-white font-bold rounded hover:bg-red-700 cursor-pointer">
                                         Decline
                                     </button>
                                 </form>
                                 <form method="post" action="{{ route('events.approve', $event->id) }}">
                                     @csrf
-                                    <button type="submit" class="mt-2 px-2 py-1 bg-green-500 text-white font-bold rounded hover:bg-green-700 cursor-pointer">
+                                    <button id="approveBtn{{$event->id}}" type="submit" onclick="hideButton('approveBtn{{$event->id}}', event)" class="mt-2 px-2 py-1 bg-green-500 text-white font-bold rounded hover:bg-green-700 cursor-pointer">
                                         Approve
                                     </button>
                                 </form>
                             </div>
+                        </td>
 
-                        </td>
-                        </td>
+
                     </tr>
                 @endforeach
                 </tbody>
@@ -94,16 +94,26 @@
 </div>
 
 <script>
-    {{--function editTemplate(newsletterId) {--}}
-    {{--    // Redirect to edit route with the newsletter ID--}}
-    {{--    window.location.href = "{{ route('edit_newsletter_template', ['id' => '']) }}/" + newsletterId;--}}
-    {{--}--}}
-
-    {{--function sendTemplate(newsletterId) {--}}
-    {{--    // Redirect to send route with the newsletter ID--}}
-    {{--    window.location.href = "{{ route('send_newsletter_template', ['id' => '']) }}".replace('','/') + newsletterId;--}}
-    {{--}--}}
+    function hideButton(buttonId, event) {
+        event.preventDefault(); // Prevent default form submission behavior
+        var button = document.getElementById(buttonId);
+        button.style.display = "none"; // Hide the button
+        // Optionally, you can submit the form asynchronously using JavaScript
+        // Here's an example of submitting the form asynchronously with Fetch API:
+        var form = button.closest('form');
+        fetch(form.action, {
+            method: form.method,
+            body: new FormData(form)
+        }).then(response => {
+            if (!response.ok) {
+                // Handle errors if needed
+            }
+        }).catch(error => {
+            // Handle errors if needed
+        });
+    }
 </script>
+
 
 </body>
 </html>
