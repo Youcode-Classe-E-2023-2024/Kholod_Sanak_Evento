@@ -35,6 +35,20 @@ class EventController extends Controller
         ]);
     }
 
+
+    public function showEventFormUpdate($id)
+    {
+        // Find the event by its ID
+        $event = Event::findOrFail($id);
+
+        // Fetch all categories and cities
+        $categories = Category::all();
+        $cities = Lieu::all();
+
+        // Pass the event, categories, and cities to the view
+        return view('writer.updateevent', compact('event', 'categories', 'cities'));
+    }
+
     public function store(Request $request)
     {
         // Validate incoming data
@@ -88,11 +102,60 @@ class EventController extends Controller
         if (Auth::id() !== $event->created_by) {
             return redirect()->back()->with('error', 'You are not authorized to delete this event.');
         }
-
         $event->delete();
 
         return redirect()->route('events.organizer')->with('success', 'Event deleted successfully.');
    }
+
+
+    public function update(Request $request, Event $event)
+    {
+        // Validate incoming data
+        $validatedData = $request->validate([
+            'title' => 'required|string',
+            'category' => 'required|exists:categories,id',
+            'lieu' => 'required|exists:lieu,id',
+            'price' => 'required|numeric',
+            'place' => 'required|numeric',
+            'description' => 'required|string',
+            'image' => 'nullable|image', // Allow empty image field for not updating the image
+            'deadline' => 'required|date',
+            'reservation_type' => 'required|in:automatic,manual'
+        ]);
+
+        // Check if the authenticated user is the creator of the event
+        if (Auth::id() !== $event->created_by) {
+            return redirect()->back()->with('error', 'You are not authorized to update this event.');
+        }
+
+        // Update event data
+        $event->titre = $validatedData['title'];
+        $event->description = $validatedData['description'];
+        $event->prix = $validatedData['price'];
+        $event->nombre_place = $validatedData['place'];
+        $event->ville_id = $validatedData['lieu'];
+        $event->deadline = Carbon::parse($validatedData['deadline'])->toDateString();
+        $event->category_id = $validatedData['category'];
+
+        // Update reservation type and status
+        $event->status = $validatedData['reservation_type'] === 'automatic' ? 1 : 0;
+
+        // Update image if provided
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $media = $event->addMedia($file)->toMediaCollection();
+            $event->id_image = $media->id;
+        }
+
+        // Save the updated event
+        $event->save();
+
+        // Redirect or return a response
+        return redirect()->route('events.organizer')->with('success', 'Event updated successfully.');
+    }
+
+
+
 
 
     /////////////////////////////           Admin             ////////////////////////////
