@@ -233,11 +233,6 @@
                         </div>
                         <!-- Event Single Content End -->
 
-
-
-
-
-                        <!-- Event Single Content End -->
                     </div>
                     <div class="col-lg-4">
                         <!-- Event Single Sidebar Start -->
@@ -245,7 +240,9 @@
 
                                 <div class="btn-price">
                                     @auth
-                                        <a class="btn btn-primary" href="{{ url('ticketForm') }}">Buy Your Ticket</a>
+                                        <a  class="btn btn-primary" href="{{ route('ticketForm', ['eventId' => $event->id]) }}">Buy Ticket</a>
+
+{{--                                        <a class="btn btn-primary" href="{{ url('ticketForm') }}">Buy Your Ticket</a>--}}
                                     @elseauth()
                                         <a class="btn btn-primary" href="{{ url('login') }}">Buy Your Ticket</a>
                                     @endauth
