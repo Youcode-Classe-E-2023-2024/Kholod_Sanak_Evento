@@ -212,12 +212,16 @@ Route::middleware(['auth', 'role:organizer'])->group(function () {
 
     /////////////////////////              ADD & Display Events                  ///////////////////////////////
     Route::get('/events',[EventController::class,'index'])->name('events.organizer');
-    Route::post('/events', [EventController::class, 'store'])->name('events.store');
+    Route::post('/events/store', [EventController::class, 'store'])->name('events.store');
 
     //template form
     Route::get('/eventForm', [EventController::class,'showEventForm'])->name('addEvent');
     //delete
-//    Route::delete('/events/{event}', [EventController::class, 'destroyOrganizer'])->name('myevents.destroy');
+    Route::delete('/myevents/{event}', [EventController::class, 'destroyOrganizer'])->name('myevents.delete');
+    //update
+    Route::get('/events/{event}/edit', [EventController::class, 'showEventFormUpdate'])->name('events.edit');
+
+    Route::post('/eventsUpdate/{event}', [EventController::class, 'update'])->name('events.update');
 
 
 
