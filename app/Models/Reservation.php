@@ -17,4 +17,9 @@ class Reservation extends Model
         'email',
         ];
 
+    public function ticket()
+    {
+        return $this->hasOne(Ticket::class);
+    }
+
 }
