@@ -3,6 +3,8 @@
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -59,16 +61,28 @@ Route::get('/home', function () {
     return view('home');
 })->name('home');
 
-Route::get('/ticketForm', function () {
-    return view('event.ticketForm');
-})->name('ticketForm');
 
 
 Route::get('/', [EventController::class,'affiche'])->name('welcome');
+
+
+
 //display single page
 Route::get('events/{id}', [EventController::class, 'show'])->name('event.single');
+//ticket form
+Route::get('/ticketForm/{eventId}', [ReservationController::class, 'showPaymentForm'])->name('ticketForm');
 
 
+
+/*
+|--------------------------------------------------------------------------
+|                                User auth
+|--------------------------------------------------------------------------
+*/
+Route::post('/reserve', [ReservationController::class,'store'])->name('reservation.store')->middleware('auth', 'role:user');
+
+Route::get('/ticket/{ticketId}', [ReservationController::class, 'showTicket'])->name('ticket.show');
+Route::get('/tickets/{ticket}/download', [TicketController::class, 'download'])->name('ticket.download');
 
 
 
