@@ -9,9 +9,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ForgotPasswordLinkController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\NewsletterController;
-use App\Http\Controllers\MediaController;
-use App\Http\Controllers\EmailListController;
+
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\UserController;
 
@@ -148,8 +146,8 @@ Route::post('/logout', [Logoutcontroller::class, 'destroy'])->name('logout')
 Route::get('/admin/dashboard', [UserController::class, 'adminDashboard'])->name('adminDashboard')->middleware('auth', 'role:admin');
 ///////////////////////////    Events
 Route::get('/events/admin',[EventController::class,'aprroveEvent'])->name('events.admin')->middleware('auth', 'role:admin');
-Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('events.destroy')->middleware('auth', 'role:admin');
 Route::post('/events/{event}/approve', [EventController::class, 'approve'])->name('events.approve')->middleware('auth', 'role:admin');
+Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('event.destroy')->middleware('auth', 'role:admin');
 
 
 /*
@@ -165,13 +163,6 @@ Route::middleware('auth', 'role:admin')->group(function () {
     ////////////////////            users list                ///////////////////////////////
     Route::get('/usersList', [UserController::class, 'index'])->name('usersList');
 
-    ////////////////////            categories list                ///////////////////////////////
-    Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
-    Route::post('/add-category', [CategoryController::class, 'store'])->name('add_category');
-    Route::delete('/delete-category/{id}', [CategoryController::class, 'deleteCategory'])->name('delete_category');
-    Route::post('/update_category/{id}', [CategoryController::class, 'update'])->name('update_category');
-
-
 
 
     ////////////////////            change users role                ///////////////////////////////
@@ -184,6 +175,12 @@ Route::middleware('auth', 'role:admin')->group(function () {
     Route::put('/users/{userId}/restore', [UserController::class, 'restore'])->name('users.restore');
 
 
+
+    ////////////////////            categories list                ///////////////////////////////
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
+    Route::post('/add-category', [CategoryController::class, 'store'])->name('add_category');
+    Route::delete('/delete-category/{id}', [CategoryController::class, 'deleteCategory'])->name('delete_category');
+    Route::post('/update_category/{id}', [CategoryController::class, 'update'])->name('update_category');
 
 
 
@@ -207,7 +204,7 @@ Route::get('/organizer/dashboard', [UserController::class, 'editorDashboard'])->
 
 /*
 |--------------------------------------------------------------------------
-|                                Writer Actions
+|                                Organizer Actions
 |--------------------------------------------------------------------------
 */
 
@@ -219,6 +216,8 @@ Route::middleware(['auth', 'role:organizer'])->group(function () {
 
     //template form
     Route::get('/eventForm', [EventController::class,'showEventForm'])->name('addEvent');
+    //delete
+//    Route::delete('/events/{event}', [EventController::class, 'destroyOrganizer'])->name('myevents.destroy');
 
 
 
