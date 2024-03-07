@@ -28,6 +28,10 @@ class Event extends Model implements HasMedia
         'acceptation'
     ];
 
+    protected $dates = [
+        'deadline',
+    ];
+
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -36,6 +40,11 @@ class Event extends Model implements HasMedia
     public function lieu()
     {
         return $this->belongsTo(Lieu::class, 'ville_id');
+    }
+
+    public function ticket()
+    {
+        return $this->hasMany(Ticket::class);
     }
 
 }
