@@ -22,4 +22,14 @@ class Reservation extends Model
         return $this->hasOne(Ticket::class);
     }
 
+    public function event()
+    {
+        return $this->belongsTo(Event::class, 'event_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }
