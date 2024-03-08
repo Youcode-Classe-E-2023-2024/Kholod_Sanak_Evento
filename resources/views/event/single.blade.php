@@ -240,13 +240,15 @@
 
                                 <div class="btn-price">
                                     @auth
-                                        <a  class="btn btn-primary" href="{{ route('ticketForm', ['eventId' => $event->id]) }}">Buy Ticket</a>
-
-{{--                                        <a class="btn btn-primary" href="{{ url('ticketForm') }}">Buy Your Ticket</a>--}}
-                                    @elseauth()
+                                        @if($event->nombre_place > 0)
+                                            <a class="btn btn-primary" href="{{ route('ticketForm', ['eventId' => $event->id]) }}">Buy Ticket</a>
+                                        @else
+                                            <span class="btn btn-primary disabled">Sold Out</span>
+                                        @endif                                    @else
                                         <a class="btn btn-primary" href="{{ url('login') }}">Buy Your Ticket</a>
                                     @endauth
-                                        <div class="price">
+
+                                    <div class="price">
                                         <span>{{ $event->prix }}<sup>Dhs</sup></span>
                                     </div>
                                 </div>
