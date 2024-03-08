@@ -11,8 +11,6 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ForgotPasswordLinkController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
-
-use App\Http\Controllers\PdfController;
 use App\Http\Controllers\UserController;
 
 
@@ -52,6 +50,21 @@ Route::get('/reset-password/success', function () {
 })->name('password.success');
 
 
+
+/*
+|--------------------------------------------------------------------------
+|                                Admin Dashboard
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/admin/dashboard', [UserController::class, 'adminDashboard'])->name('adminDashboard')->middleware('auth', 'role:admin');
+///////////////////////////    Events
+Route::get('/events/admin',[EventController::class,'aprroveEvent'])->name('events.admin')->middleware('auth', 'role:admin');
+Route::post('/events/{event}/approve', [EventController::class, 'approve'])->name('events.approve')->middleware('auth', 'role:admin');
+Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('event.destroy')->middleware('auth', 'role:admin');
+
+
+
 /*
 |--------------------------------------------------------------------------
 |                                Homepage
@@ -73,16 +86,18 @@ Route::get('events/{id}', [EventController::class, 'show'])->name('event.single'
 Route::get('/ticketForm/{eventId}', [ReservationController::class, 'showPaymentForm'])->name('ticketForm');
 
 
-
 /*
 |--------------------------------------------------------------------------
 |                                User auth
 |--------------------------------------------------------------------------
 */
-Route::post('/reserve', [ReservationController::class,'store'])->name('reservation.store')->middleware('auth', 'role:user');
+Route::post('/reserve', [ReservationController::class,'store'])->name('reservation.store');
 
 Route::get('/ticket/{ticketId}', [ReservationController::class, 'showTicket'])->name('ticket.show');
 Route::get('/tickets/{ticket}/download', [TicketController::class, 'download'])->name('ticket.download');
+
+
+
 
 
 
@@ -148,18 +163,6 @@ Route::post('/logout', [Logoutcontroller::class, 'destroy'])->name('logout')
 
 
 
-/*
-|--------------------------------------------------------------------------
-|                                Admin Dashboard
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/admin/dashboard', [UserController::class, 'adminDashboard'])->name('adminDashboard')->middleware('auth', 'role:admin');
-///////////////////////////    Events
-Route::get('/events/admin',[EventController::class,'aprroveEvent'])->name('events.admin')->middleware('auth', 'role:admin');
-Route::post('/events/{event}/approve', [EventController::class, 'approve'])->name('events.approve')->middleware('auth', 'role:admin');
-Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('event.destroy')->middleware('auth', 'role:admin');
-
 
 /*
 |--------------------------------------------------------------------------
@@ -169,12 +172,8 @@ Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('eve
 
 Route::middleware('auth', 'role:admin')->group(function () {
 
-
-
     ////////////////////            users list                ///////////////////////////////
     Route::get('/usersList', [UserController::class, 'index'])->name('usersList');
-
-
 
     ////////////////////            change users role                ///////////////////////////////
     Route::put('/users/{user}', [UserController::class, 'update'])->name('updateUserRole');
@@ -233,6 +232,14 @@ Route::middleware(['auth', 'role:organizer'])->group(function () {
     Route::get('/events/{event}/edit', [EventController::class, 'showEventFormUpdate'])->name('events.edit');
 
     Route::post('/eventsUpdate/{event}', [EventController::class, 'update'])->name('events.update');
+
+    /////////////////////////////////////        Reservations          ////////////////////////////////////////////////////
+    Route::get('reservations/list',[ReservationController::class,'showReservationList'])->name('reservations.organizer');
+    //approve
+    Route::post('/reservations/{id}/approve', [ReservationController::class,'approve'])->name('reservations.approve');
+    //decline
+    Route::delete('/reservations/{id}/decline', [ReservationController::class,'decline'])->name('reservations.decline');
+
 
 
 
