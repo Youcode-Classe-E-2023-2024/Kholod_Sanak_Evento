@@ -171,7 +171,7 @@ class EventController extends Controller
     |--------------------------------------------------------------------------
     */
     public function aprroveEvent(){
-        $events = Event::latest()->paginate(10);
+        $events = Event::where('status', 0)->latest()->paginate(10);
 
         return view('admin.events',[
             'events'=>$events
