@@ -8,9 +8,9 @@ $(function() {
         $('#preloader').delay(500).fadeOut(500);
     });
 
-    /*--    
+    /*--
         Tabs
-    -----------------------------------*/  
+    -----------------------------------*/
     const tabs = document.querySelectorAll('[data-tab-target]')
     const tabContents = document.querySelectorAll('.meeta-event-schedule-tab-pane')
 
@@ -31,7 +31,7 @@ $(function() {
     /*--
 		Header Sticky
     -----------------------------------*/
-    $(window).on('scroll', function(event) {    
+    $(window).on('scroll', function(event) {
         var scroll = $(window).scrollTop();
         if (scroll <= 100) {
             $(".header-sticky").removeClass("sticky");
@@ -47,11 +47,17 @@ $(function() {
 	var $navSearch = $('.search-btn');
 	var $searchClose = $('#search-close');
 
-	$('.search-btn').on('click', function (e) {
-		e.preventDefault();
-		$searchWrap.animate({ opacity: 'toggle' }, 500);
-		$navSearch.add($searchClose).addClass("open");
-	});
+    // Event handler for search button in the navigation bar
+    $('.header-search .search-btn').on('click', function (e) {
+        e.preventDefault();
+        $searchWrap.animate({ opacity: 'toggle' }, 500);
+        $navSearch.add($searchClose).toggleClass("open");
+    });
+
+// Event handler for search button in the form
+    $('.form-btn .search-btn').on('click', function (e) {
+        // Allow form submission
+    });
 
 	$('.search-close').on('click', function (e) {
 		e.preventDefault();
@@ -84,17 +90,17 @@ $(function() {
             $('.mobile-menu').addClass('open')
             $('.overlay').addClass('open')
         });
-        
+
         $('.menu-close').on('click', function(){
             $('.mobile-menu').removeClass('open')
             $('.overlay').removeClass('open')
         });
-        
+
         $('.overlay').on('click', function(){
             $('.mobile-menu').removeClass('open')
             $('.overlay').removeClass('open')
         });
-        
+
         /*Variables*/
         var $offCanvasNav = $('.offcanvas-menu'),
         $offCanvasNavSubMenu = $offCanvasNav.find('.sub-menu');
@@ -126,9 +132,9 @@ $(function() {
     }
     menuScript();
 
-    
-    
-    
+
+
+
     /*--
         Countdown
     -----------------------------------*/
@@ -145,17 +151,17 @@ $(function() {
           minsLeft = Math.floor((e_hrsLeft - hrsLeft) * 60),
           e_secsLeft = (e_minsLeft - minsLeft) * 60,
           secsLeft = Math.floor((e_minsLeft - minsLeft) * 60);
-    
+
         var yearsLeft = 0;
         var monthsLeft = 0
         var weeksLeft = 0;
-    
+
         if ($format != 'short') {
           if (daysLeft > 365) {
             yearsLeft = Math.floor(daysLeft / 365);
             daysLeft = daysLeft % 365;
           }
-    
+
           if (daysLeft > 30) {
             monthsLeft = Math.floor(daysLeft / 30);
             daysLeft = daysLeft % 30;
@@ -165,7 +171,7 @@ $(function() {
             daysLeft = daysLeft % 7;
           }
         }
-    
+
         var yearsLeft = yearsLeft < 10 ? "0" + yearsLeft : yearsLeft,
           monthsLeft = monthsLeft < 10 ? "0" + monthsLeft : monthsLeft,
           weeksLeft = weeksLeft < 10 ? "0" + weeksLeft : weeksLeft,
@@ -180,7 +186,7 @@ $(function() {
           hourText = hrsLeft > 1 ? 'Hours' : 'Hr',
           minsText = minsLeft > 1 ? 'Mints' : 'min',
           secText = secsLeft > 1 ? 'Secs' : 'sec';
-    
+
         var $markup = {
           wrapper: $this.find('.countdown__item'),
           year: $this.find('.yearsLeft'),
@@ -198,7 +204,7 @@ $(function() {
           minTxt: $this.find('.minsText'),
           secTxt: $this.find('.secsText')
         }
-    
+
         var elNumber = $markup.wrapper.length;
         $this.addClass('item-' + elNumber);
         $($markup.year).html(yearsLeft);
@@ -216,7 +222,7 @@ $(function() {
         $($markup.second).html(secsLeft);
         $($markup.secTxt).html(secText);
     }
-    
+
     $('.countdown').each(function () {
         var $this = $(this);
         var $endDate = $(this).data('countdown');
@@ -229,9 +235,9 @@ $(function() {
 
     $('.meeta-event-accordion-title').click(function(e) {
             e.preventDefault();
-        
+
         let $this = $(this);
-        
+
         if ($this.next().hasClass('show')) {
             $this.next().removeClass('show');
             $this.next().slideUp(350);
@@ -244,12 +250,12 @@ $(function() {
     });
 
 
-   
+
     $(".meeta-event-accordion-item > .meeta-event-accordion-toggle").on("click", function() {
         if ($(this).hasClass("active")) {
             $(this).removeClass("active");
             $(this).siblings(".meeta-event-accordion-body").slideUp(200);
-        } else {           
+        } else {
             $(".meeta-event-accordion-item > .meeta-event-accordion-toggle").removeClass("active");
             $(this).addClass("active");
             $(".meeta-event-accordion-body").slideUp(200);
@@ -282,7 +288,7 @@ $(function() {
             },
             992: {
               slidesPerView: 4,
-            }            
+            }
         },
     });
 
@@ -374,7 +380,7 @@ $(function() {
     slidesPerView: 2,
     spaceBetween: 50,
     centeredSlides: true,
-    loop: true,        
+    loop: true,
     grabCursor: true,
     pagination: {
       el: ".event-project-active .swiper-pagination",
@@ -391,9 +397,9 @@ $(function() {
   });
 
 
-    /*--    
+    /*--
       Counter Up
-    -----------------------------------*/  
+    -----------------------------------*/
 
     $('.counter').counterUp({
         delay: 10,
@@ -401,15 +407,15 @@ $(function() {
     });
 
     /*--
-		MagnificPopup video view 
-	-----------------------------------*/	
+		MagnificPopup video view
+	-----------------------------------*/
     $('.popup-video').magnificPopup({
       type: 'iframe'
     });
 
-    
+
     /*--
-      Magnific Popup  
+      Magnific Popup
     -----------------------------------*/
     $('.image-popup').magnificPopup({
         type: 'image',
@@ -419,21 +425,21 @@ $(function() {
     });
 
      /*--
-      nice select  
+      nice select
     -----------------------------------*/
 	  $('select').niceSelect();
 
-    
+
     /*--
         AOS
     -----------------------------------*/
-    
+
     AOS.init({
       duration: 1200,
       once: true,
   });
 
-    
-    
-    
+
+
+
 });
