@@ -78,6 +78,7 @@ Route::get('/home', function () {
 
 Route::get('/', [EventController::class,'affiche'])->name('welcome');
 
+Route::get('/events/search', [EventController::class,'searchEvents'])->name('events.search');
 
 
 //display single page
@@ -91,6 +92,8 @@ Route::get('/ticketForm/{eventId}', [ReservationController::class, 'showPaymentF
 //Route::get('events/by/category', [EventController::class, 'showEventByCategory'])->name('events.category');
 Route::get('/events/category/{categoryId}', [EventController::class, 'showEventByCategory'])
     ->name('events.category');
+////////////////////////////////           Search
+///
 
 
 /*
