@@ -18,12 +18,19 @@ class EventController extends Controller
     |                                Organizer
     |--------------------------------------------------------------------------
     */
+
+
     public function index()
     {
-        $events = Event::withTrashed()->latest()->paginate(10);
+        // Retrieve the currently authenticated organizer
+        $organizer = Auth::user(); // Assuming your Organizer model is associated with the User model
+
+        // Retrieve events associated with the organizer
+        $events = $organizer->events()->withTrashed()->latest()->paginate(10);
 
         return view('writer.events', ['events' => $events]);
     }
+
 
     public function stat(){
         $events = Event::all()->count();
@@ -227,16 +234,12 @@ class EventController extends Controller
         return view('event.eventList', compact('category', 'events'));
     }
 
+
     public function searchEvents(Request $request)
     {
         $titre = $request->input('titre');
 
         $query = Event::query();
-
-//        if ($titre) {
-//            $query->where('titre', 'like', '%' . $titre . '%');
-//
-//        }
 
         if ($titre) {
             $query->where('titre', 'like', '%' . $titre . '%');
