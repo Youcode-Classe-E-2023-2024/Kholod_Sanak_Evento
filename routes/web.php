@@ -74,8 +74,6 @@ Route::get('/home', function () {
     return view('home');
 })->name('home');
 
-
-
 Route::get('/', [EventController::class,'affiche'])->name('welcome');
 
 Route::get('/events/search', [EventController::class,'searchEvents'])->name('events.search');
