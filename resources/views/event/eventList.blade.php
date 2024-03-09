@@ -73,7 +73,7 @@
                         <!-- Header Navigation Start -->
                         <div class="header-navigation">
                             <ul class="main-menu">
-                                <li><a href="#">Home</a>
+                                <li><a href="{{route('welcome')}}">Home</a>
 
                                 </li>
                                 <li><a href="about.html">About</a></li>
@@ -96,13 +96,6 @@
                         <div class="header-meta">
 
                             <div class="header-actions">
-                                <div class="header-action">
-                                    <button class="icon-open-container">
-                                        <span class="action-text">My Cart</span>
-                                        <i class="flaticon-shopping-cart"></i>
-                                        <span class="count">3</span>
-                                    </button>
-                                </div>
                                 <div class="header-action d-none d-sm-block">
                                     <div class="header-search">
                                         <a class="search-btn" href="#"><i class="flaticon-loupe"></i></a>
@@ -110,9 +103,10 @@
                                             <div class="search-inner">
                                                 <i id="search-close" class="flaticon-close search-close"></i>
                                                 <div class="search-cell">
-                                                    <form action="#">
+                                                    <form action="{{ route('events.search') }}" method="GET">
+                                                        @csrf
                                                         <div class="search-field-holder">
-                                                            <input class="main-search-input" type="search" placeholder="Search Your Keyword...">
+                                                            <input name="titre" class="main-search-input" type="search" placeholder="Search Your Keyword...">
                                                         </div>
                                                     </form>
                                                 </div>
