@@ -240,10 +240,13 @@
                         </div>
                         <div class="search-form-wrap" data-aos-delay="900" data-aos="fade-up">
                             <div class="search-form-inner">
-                                <form class="search-form" action="#">
+
+{{--                                search form--}}
+                                <form class="search-form" action="{{ route('events.search') }}" method="GET">
+                                    @csrf
                                     <div class="single-form">
                                         <label class="form-label"><i class="fas fa-search"></i> Event Title</label>
-                                        <input type="text" placeholder="Type Event Name">
+                                        <input name="titre" type="text" placeholder="Type Event Name">
                                     </div>
                                     <div class="single-form">
                                         <label class="form-label"><i class="fas fa-list-alt"></i> Category</label>
@@ -266,7 +269,7 @@
                                     </div>
 
                                     <div class="form-btn">
-                                        <button class="search-btn"><i class="flaticon-loupe"></i></button>
+                                        <button  class="search-btn"><i class="flaticon-loupe"></i> </button>
                                     </div>
                                 </form>
                             </div>
