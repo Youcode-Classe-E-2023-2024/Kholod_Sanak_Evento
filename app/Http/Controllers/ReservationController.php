@@ -41,7 +41,6 @@ class ReservationController extends Controller
             $eventStatus = $eventPlace->status;
         }
 
-
         $user_id = Auth::id();
 
         // Create a reservation
@@ -65,40 +64,7 @@ class ReservationController extends Controller
 
         return redirect()->route('event.single', $reservation->event_id);
     }
-//    public function store1(Request $request)
-//    {
-//        // Validate the request data
-//        $validatedData = $request->validate([
-//            'email' => 'required|email',
-//        ]);
-//
-//        // Find the event place and decrement the nombre_place
-//        $eventPlace = Event::find($request->event_id);
-//        if ($eventPlace) {
-//            $eventPlace->decrement('nombre_place');
-//        }
-//
-//        $user_id = Auth::id();
-//
-//        // Create a reservation
-//        $reservation = Reservation::create([
-//            'user_id' => $user_id,
-//            'event_id' => $request->event_id,
-//            'email' => $validatedData['email'],
-//        ]);
-//
-//        // Create a ticket and associate it with the reservation
-//        $ticket = new Ticket();
-//        $ticket->user_id=$user_id;
-//        $ticket->event_id = $request->event_id;
-//        $ticket->ticket_number = rand(10000000, 99999999);
-//        $reservation->ticket()->save($ticket);
-//
-//
-////        return redirect()->route('ticket.show', $ticket->id);
-//        return redirect()->route('ticket.download', $ticket->id);
-//
-//    }
+
 
     /////////////////////////////////          Organizer             ///////////////////////////////////////////
     ///
@@ -128,6 +94,7 @@ class ReservationController extends Controller
 
         return redirect()->back()->with('success', 'Reservation has been approved.');
     }
+
 
     public function decline($id)
     {
