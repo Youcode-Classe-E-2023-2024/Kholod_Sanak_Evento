@@ -63,7 +63,7 @@
 
                         <!-- Header Logo Start -->
                         <div class="header-logo">
-                            <a href="index.html"><img src="assets/images/logo-4.png" alt="Logo"></a>
+                            <a href="{{route('welcome')}}"><img src="{{url('assets/images/logo-4.png')}}" alt="Logo"></a>
                         </div>
                         <!-- Header Logo End -->
 
@@ -143,62 +143,7 @@
     </div>
     <!-- Header End -->
 
-    <!-- Mini Cart Start -->
-    <div class="off-canvas">
-        <div class="icon-close"></div>
 
-        <!-- Mini Cart Box Start -->
-        <div class="meeta-mini-cart-box">
-
-            <div class="mini-cart-items">
-
-                <div class="mini-cart-item">
-                    <div class="mini-cart-item-image">
-                        <a href="#"><img src="assets/images/cart/cart-1.jpg" alt="Cart"></a>
-                    </div>
-                    <div class="mini-cart-item-content">
-                        <h4 class="mini-cart-title"><a href="#">Virtual Event with Protected Content and Hidden Livestream </a></h4>
-                        <p class="mini-cart-quantity">1 × $19.99</p>
-                    </div>
-                    <button class="btn-close"></button>
-                </div>
-
-                <div class="mini-cart-item">
-                    <div class="mini-cart-item-image">
-                        <a href="#"><img src="assets/images/cart/cart-2.jpg" alt="Cart"></a>
-                    </div>
-                    <div class="mini-cart-item-content">
-                        <h4 class="mini-cart-title"><a href="#">Virtual Event with Protected Content and Hidden Livestream </a></h4>
-                        <p class="mini-cart-quantity">1 × $19.99</p>
-                    </div>
-                    <button class="btn-close"></button>
-                </div>
-
-                <div class="mini-cart-item">
-                    <div class="mini-cart-item-image">
-                        <a href="#"><img src="assets/images/cart/cart-3.jpg" alt="Cart"></a>
-                    </div>
-                    <div class="mini-cart-item-content">
-                        <h4 class="mini-cart-title"><a href="#">Virtual Event with Protected Content and Hidden Livestream </a></h4>
-                        <p class="mini-cart-quantity">1 × $19.99</p>
-                    </div>
-                    <button class="btn-close"></button>
-                </div>
-
-            </div>
-
-            <div class="mini-cart-sub-total">
-                <p><strong>Subtotal:</strong> <span class="mini-cart-amount">$99.97</span></p>
-            </div>
-            <div class="mini-cart-sub-btn">
-                <a class="btn btn-primary" href="#">View cart</a>
-                <a class="btn btn-white" href="#">Checkout</a>
-            </div>
-        </div>
-        <!-- Mini Cart Box End -->
-
-    </div>
-    <!-- Mini Cart End -->
 
 
     <!-- Offcanvas Start-->
@@ -206,7 +151,7 @@
         <div class="offcanvas-header">
             <!-- Offcanvas Logo Start -->
             <div class="offcanvas-logo">
-                <a href="index.html"><img src="assets/images/logo-4.png" alt=""></a>
+                <a href="{{route('welcome')}}"><img src={{url('"assets/images/logo-4.png"')}} alt=""></a>
             </div>
             <!-- Offcanvas Logo End -->
             <button type="button" class="close-btn" data-bs-dismiss="offcanvas"><i class="flaticon-close"></i></button>
@@ -216,7 +161,7 @@
         <div class="offcanvas-body">
             <div class="offcanvas-menu offcanvas-menu-2">
                 <ul class="main-menu">
-                    <li><a href="#">Home</a>
+                    <li><a href="{{route('welcome')}}">Home</a>
 
                     </li>
                     <li><a href="about.html">About</a></li>

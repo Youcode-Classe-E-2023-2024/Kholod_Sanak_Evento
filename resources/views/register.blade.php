@@ -1,87 +1,380 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class="no-js" lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <title>Register Page</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title> Meeta - Event List</title>
+    <meta name="robots" content="noindex, follow">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{{url('/assets/images/favicon.png')}}">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="../../../css2?family=Big+Shoulders+Display:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="../../../css?family=Archivo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS
+	============================================ -->
+
+    <!-- Icon Font CSS -->
+    <link rel="stylesheet" href="{{url('/assets/css/all.min.css')}}">
+    <link rel="stylesheet" href="{{url('/assets/css/flaticon.css')}}">
+
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="{{url('/assets/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url('/assets/css/swiper-bundle.min.css')}}">
+    <link rel="stylesheet" href="{{url('/assets/css/magnific-popup.css')}}">
+    <link rel="stylesheet" href="{{url('/assets/css/aos.css')}}">
+    <link rel="stylesheet" href="{{url('/assets/css/nice-select.css')}}">
+
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="{{url('/assets/css/style.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-jQRcBrHrAVYtV1u0/wx42UblVleFbhkeBLi8UpvE7l5rFRRg5uT2aY+bvyL4YH1Wm8C2AzM7vEseEfnqeYIzjQ==" crossorigin="anonymous" />
+
+
+
 </head>
+
 <body>
-@include('inc/header')
-<div class="flex justify-center">
-    <div class="w-full min-h-screen bg-gray-50 flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
-        <div class="w-full sm:max-w-md p-5 mx-auto">
-{{--            <h2 class="mb-12 text-center text-5xl font-extrabold">Welcome.</h2>--}}
-            <div class="p-10 w-full max-w-lg bg-white rounded-2xl shadow-xl shadow-gray-300">
-                <div class="space-y-8">
-                    <h2 class="text-2xl font-bold text-gray-900">
-                        Sign up to platform
-                    </h2>
-                    {{--            facebook--}}
-                    <div class="grid grid-cols-3 gap-3 mt-6">
-                        <a href="#" class="inline-flex justify-center w-full px-5 py-2.5 text-sm font-medium text-[#4267B2] border border-gray-200 rounded-lg shadow-sm hover:bg-gray-50">
-                            <svg class="w-5 h-5" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.8 90.69 226.4 209.3 245V327.7h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.3 482.4 504 379.8 504 256z"></path></svg>
-                        </a>
-                        {{--                gmail--}}
-                        <a href="{{route('google-auth')}}" class="inline-flex justify-center w-full px-5 py-2.5 text-sm font-medium text-[#DB4437] border border-gray-200 rounded-lg shadow-sm hover:bg-gray-50">
-                            <svg class="w-5 h-5" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><path fill="currentColor" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"></path></svg>
-                        </a>
-                        <a href="#" class="inline-flex justify-center w-full px-5 py-2.5 text-sm font-medium text-[#00acee] border border-gray-200 rounded-lg shadow-sm hover:bg-gray-50">
-                            <svg class="w-5 h-5" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M459.4 151.7c.325 4.548 .325 9.097 .325 13.65 0 138.7-105.6 298.6-298.6 298.6-59.45 0-114.7-17.22-161.1-47.11 8.447 .974 16.57 1.299 25.34 1.299 49.06 0 94.21-16.57 130.3-44.83-46.13-.975-84.79-31.19-98.11-72.77 6.498 .974 12.99 1.624 19.82 1.624 9.421 0 18.84-1.3 27.61-3.573-48.08-9.747-84.14-51.98-84.14-102.1v-1.299c13.97 7.797 30.21 12.67 47.43 13.32-28.26-18.84-46.78-51.01-46.78-87.39 0-19.49 5.197-37.36 14.29-52.95 51.65 63.67 129.3 105.3 216.4 109.8-1.624-7.797-2.599-15.92-2.599-24.04 0-57.83 46.78-104.9 104.9-104.9 30.21 0 57.5 12.67 76.67 33.14 23.72-4.548 46.46-13.32 66.6-25.34-7.798 24.37-24.37 44.83-46.13 57.83 21.12-2.273 41.58-8.122 60.43-16.24-14.29 20.79-32.16 39.31-52.63 54.25z"></path></svg>
-                        </a>
-                    </div>
-                    <form method="post" action="{{ route('register') }}" enctype="multipart/form-data" class="space-y-4">
-                        @csrf
-                        <div>
-                            <label for="name" class="block mb-1 text-sm">Name</label>
-                            <input id="name" type="text" name="name" value="{{ old('name') }}" class="py-2 px-3 border border-gray-300 focus:border-red-300 focus:outline-none focus:ring focus:ring-red-200 focus:ring-opacity-50 rounded-md shadow-sm disabled:bg-gray-100 mt-1 block w-full" />
-                            @error('name')
-                            <span class="text-red-500 text-sm">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div>
-                            <label for="email" class="block mb-1 text-sm">Email-Address</label>
-                            <input id="email" type="text" name="email" value="{{ old('email') }}" class="py-2 px-3 border border-gray-300 focus:border-red-300 focus:outline-none focus:ring focus:ring-red-200 focus:ring-opacity-50 rounded-md shadow-sm disabled:bg-gray-100 mt-1 block w-full"/>
-                            @error('email')
-                            <span class="text-red-500 text-sm">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div>
-                            <label for="password" class="block mb-1 text-sm">Password</label>
-                            <input id="password" type="password" name="password" class="py-2 px-3 border border-gray-300 focus:border-red-300 focus:outline-none focus:ring focus:ring-red-200 focus:ring-opacity-50 rounded-md shadow-sm disabled:bg-gray-100 mt-1 block w-full" />
-                            @error('password')
-                            <span class="text-red-500 text-sm">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div>
-                            <label for="password_confirmation" class="block mb-1 text-sm">Confirm Password</label>
-                            <input id="password_confirmation" type="password" name="password_confirmation" class="py-2 px-3 border border-gray-300 focus:border-red-300 focus:outline-none focus:ring focus:ring-red-200 focus:ring-opacity-50 rounded-md shadow-sm disabled:bg-gray-100 mt-1 block w-full" />
-                        </div>
 
-                        <div class="mb-4">
-                            <label class="block mb-2 text-sm">Signup as:</label>
-                            <div class="flex items-center mb-5">
-                                <label class="inline-flex items-center mr-4">
-                                    <input type="radio" name="role" value="user" class="border border-gray-300 text-red-600 shadow-sm focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50" {{ old('role') == 'user' ? 'checked' : '' }}>
-                                    <span class="ml-2 text-sm">User</span>
-                                </label>
-                                <label class="inline-flex items-center">
-                                    <input type="radio" name="role" value="organizer" class="border border-gray-300 text-red-600 shadow-sm focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50" {{ old('role') == 'organizer' ? 'checked' : '' }}>
-                                    <span class="ml-2 text-sm">Organizer</span>
-                                </label>
-                            </div>
-                            @error('role')
-                            <span class="text-red-500 text-sm">{{ $message }}</span>
-                            @enderror
-                        </div>
+<div class="main-wrapper">
 
-                        <div>
-                            <button class="w-full inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-sm text-white hover:bg-red-700 active:bg-red-700 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 disabled:opacity-25 transition">Sign Up</button>
-                        </div>
-                    </form>
-
-                </div>
+    <!-- Preloader start -->
+    <div id="preloader">
+        <div class="preloader">
+            <span></span>
+            <span></span>
+        </div>
     </div>
+    <!-- Preloader End -->
+
+    <!-- Header Start -->
+    <div class="meeta-header-section meeta-header-4">
+
+        <!-- Header Middle Start -->
+        <div class="header-middle header-sticky">
+            <div class="container-fluid custom-container">
+
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-4">
+
+                        <!-- Header Logo Start -->
+                        <div class="header-logo">
+                            <a href="{{route('welcome')}}"><img src="{{url('assets/images/logo-4.png')}}" alt="Logo"></a>
+                        </div>
+                        <!-- Header Logo End -->
+
+                    </div>
+                    <div class="col-lg-6 d-none d-lg-block">
+
+                        <!-- Header Navigation Start -->
+                        <div class="header-navigation">
+                            <ul class="main-menu">
+                                <li><a href="{{route('welcome')}}">Home</a>
+
+                                </li>
+                                <li><a href="about.html">About</a></li>
+                                <li class="active-menu"><a href="#">Pages</a>
+
+                                </li>
+                                <li><a href="#">Blog</a>
+
+
+                                </li>
+                                <li><a href="contact.html">Contact</a></li>
+                            </ul>
+                        </div>
+                        <!-- Header Navigation End -->
+
+                    </div>
+                    <div class="col-lg-3 col-8">
+
+                        <!-- Header Meta Start -->
+                        <div class="header-meta">
+
+                            <div class="header-actions">
+                                <div class="header-action d-none d-sm-block">
+                                    <div class="header-search">
+                                        <a class="search-btn" href="#"><i class="flaticon-loupe"></i></a>
+                                        <div class="search-wrap">
+                                            <div class="search-inner">
+                                                <i id="search-close" class="flaticon-close search-close"></i>
+                                                <div class="search-cell">
+                                                    <form action="{{ route('events.search') }}" method="GET">
+                                                        @csrf
+                                                        <div class="search-field-holder">
+                                                            <input name="titre" class="main-search-input" type="search" placeholder="Search Your Keyword...">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="header-btn d-none d-md-block">
+                                <a href="price.html" class="btn btn-3 btn-primary">Buy Ticket Now</a>
+                            </div>
+
+                            <!-- Header Toggle Start -->
+                            <div class="header-toggle d-md-none">
+                                <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </button>
+                            </div>
+                            <!-- Header Toggle End -->
+
+                        </div>
+                        <!-- Header Meta End -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- Header Middle End -->
+
+    </div>
+    <!-- Header End -->
+
+
+
+
+    <!-- Offcanvas Start-->
+    <div class="offcanvas offcanvas-start" id="offcanvasExample">
+        <div class="offcanvas-header">
+            <!-- Offcanvas Logo Start -->
+            <div class="offcanvas-logo">
+                <a href="{{route('welcome')}}"><img src={{url('"assets/images/logo-4.png"')}} alt=""></a>
+            </div>
+            <!-- Offcanvas Logo End -->
+            <button type="button" class="close-btn" data-bs-dismiss="offcanvas"><i class="flaticon-close"></i></button>
+        </div>
+
+        <!-- Offcanvas Body Start -->
+        <div class="offcanvas-body">
+            <div class="offcanvas-menu offcanvas-menu-2">
+                <ul class="main-menu">
+                    <li><a href="{{route('welcome')}}">Home</a>
+
+                    </li>
+                    <li><a href="about.html">About</a></li>
+                    <li class="active-menu"><a href="#">Pages</a>
+
+                    </li>
+                    <li><a href="#">Blog</a>
+
+                    </li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- Offcanvas Body End -->
+    </div>
+    <!-- Offcanvas End -->
+
+    <!-- Page Banner Start -->
+    <div class="section page-banner-section">
+        <div class="shape-2"></div>
+        <div class="container">
+            <div class="page-banner-wrap">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!-- Page Banner Content Start -->
+                        <div class="page-banner text-center">
+                            <h2 class="title">Register Page </h2>
+                            <ul class="breadcrumb justify-content-center">
+
+                                @if(isset($category))
+                                    <li class="breadcrumb-item"><a href="{{ route('events.category', ['categoryId' => $category->id]) }}">{{ $category->name }}</a></li>
+                                @endif
+                                <li class="breadcrumb-item active" aria-current="page">Sign up </li>
+                            </ul>
+                        </div>
+                        <!-- Page Banner Content End -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page Banner End -->
+
+
+    <!-- Register Section Start -->
+    <div class="section login-register-section section-padding">
+        <div class="container d-flex justify-content-center align-items-center border-light p-4">
+
+            <!-- Register  Wrapper Start -->
+            <div class="login-register-wrap">
+                <div class="row gx-5">
+                    <div class="col-lg-12">
+
+                        <!-- Register  Box Start -->
+                        <div class="login-register-box">
+                            <!-- Section Title Start -->
+                            <div class="section-title">
+                                <h2 class="title mb-5">Register </h2>
+                            </div>
+                            <!-- Section Title End -->
+                            <!-- Icons for Gmail and Facebook -->
+                            <div class="social-icons mt-4">
+                                <a href="{{route('google-auth')}}" class="btn btn-outline-dark"><i class="fab fa-google"></i> Register  with Gmail</a>
+                                <a href="#" class="btn btn-outline-primary"><i class="fab fa-facebook"></i> Register  with Facebook</a>
+                            </div>
+                            <div class="login-register-form">
+                                <form  method="post" action="{{route('register')}}"   enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="single-form">
+                                        <input name="name" type="text" class="form-control mb-4" placeholder="Username">
+                                        @error('name')
+                                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="single-form">
+                                        <input name="email" type="text" class="form-control mb-4" placeholder="Email">
+                                        @error('email')
+                                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="single-form">
+                                        <input name="password" type="password" class="form-control mb-4" placeholder="Password">
+                                        @error('password')
+                                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="single-form">
+                                        <input name="password_confirmation" type="password" class="form-control mb-4" placeholder="Confirm your Password">
+                                        @error('password_confirmation')
+                                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                        <label class="block mb-2 text-sm">Signup as:</label>
+                                        <div class="flex items-center mb-2">
+                                            <label class="inline-flex items-center mr-4">
+                                                <input type="radio" name="role" value="user" class="border border-gray-300 text-red-600 shadow-sm focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50" {{ old('role') == 'user' ? 'checked' : '' }}>
+                                                <span class="ml-2 text-sm">User</span>
+                                            </label>
+                                            <label class="inline-flex items-center">
+                                                <input type="radio" name="role" value="organizer" class="border border-gray-300 text-red-600 shadow-sm focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50" {{ old('role') == 'organizer' ? 'checked' : '' }}>
+                                                <span class="ml-2 text-sm">Organizer</span>
+                                            </label>
+                                        </div>
+                                        @error('role')
+                                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                                        @enderror
+
+
+                                    <div class="form-btn">
+                                        <button class="btn-2">Register </button>
+                                    </div>
+                                    <div class="single-form">
+                                        <p><a href="{{route('login')}}">Already have an account?</a></p>
+                                    </div>
+                                </form>
+
+
+                            </div>
+                        </div>
+                        <!-- Login Box End -->
+
+                    </div>
+                </div>
+            </div>
+            <!-- Login Wrapper End -->
+
+        </div>
+    </div>
+    <!-- Login Section End -->
+
+
+
+
+    <!-- Footer Start -->
+    <div class="meeta-footer-section" style="background-image: {{url('assets/images/bg/footer-bg.jpg')}};">
+
+        <!-- Footer Widget Start -->
+        <div class="footer-widget text-center">
+            <div class="container">
+
+                <!-- Footer Logo Start -->
+                <div class="footer-logo">
+                    <a href="{{route('welcome')}}"><img src="{{url('assets/images/footer-logo-1.png')}}" alt="Logo"></a>
+                </div>
+                <!-- Footer Logo End -->
+
+                <!-- Footer Newsletter Start -->
+                <div class="footer-newsletter">
+                    <p>Join our mailing list to stay up to date on all things Expotin</p>
+
+                    <div class="footer-newsletter-form">
+                        <form action="#">
+                            <input type="text" placeholder="Your Email">
+                            <button class="btn btn-primary">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- Footer Newsletter End -->
+
+                <!-- Footer widget Social Start -->
+                <div class="footer-widget-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-dribbble"></i></a>
+                    <a href="#"><i class="fab fa-behance"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                </div>
+                <!-- Footer widget Social End -->
+
+                <!-- Footer Copyright Start -->
+                <div class="footer-copyright">
+                    <p>2024 Evento. All Rights Reserved</p>
+                </div>
+                <!-- Footer Copyright End -->
+
+            </div>
+        </div>
+        <!-- Footer Widget End -->
+
+    </div>
+    <!-- Footer End -->
+
+    <!-- back to top start -->
+    <div class="progress-wrap">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewbox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"></path>
+        </svg>
+    </div>
+    <!-- back to top end -->
 </div>
+!-- JS
+============================================ -->
+
+<!-- Modernizer & jQuery JS -->
+<script src="{{ asset('assets/js/vendor/modernizr-3.11.7.min.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/jquery-1.12.4.min.js') }}"></script>
+
+<!-- Bootstrap JS -->
+<script src="{{ asset('assets/js/popper.min.js') }}"></script>
+<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+
+<!-- Plugins JS -->
+<script src="{{ asset('assets/js/swiper-bundle.min.js') }}"></script>
+<script src="{{ asset('assets/js/back-to-top.js') }}"></script>
+<script src="{{ asset('assets/js/jquery.magnific-popup.min.js') }}"></script>
+<script src="{{ asset('assets/js/jquery.counterup.min.js') }}"></script>
+<script src="{{ asset('assets/js/waypoints.min.js') }}"></script>
+<script src="{{ asset('assets/js/aos.js') }}"></script>
+<script src="{{ asset('assets/js/jquery.nice-select.min.js') }}"></script>
+
+<!-- Main JS -->
+<script src="{{ asset('assets/js/main.js') }}"></script>
 </body>
 </html>

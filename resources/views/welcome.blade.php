@@ -34,6 +34,8 @@
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="{{url('/assets/css/style.css')}}">
 
+
+
 </head>
 
 <body>
@@ -60,15 +62,15 @@
                 <div class="header-wrap">
                     <!-- Header Logo Start -->
                     <div class="header-logo header-logo-3">
-                        <a class="logo-black" href="index.html"><img src="{{url('/assets/images/logo-3.png')}}" alt="Logo"></a>
-                        <a class="logo-white" href="index.html"><img src="{{url('/assets/images/logo-4.png')}}" alt="Logo"></a>
+                        <a class="logo-black" href="{{route('welcome')}}"><img src="{{url('/assets/images/logo-3.png')}}" alt="Logo"></a>
+                        <a class="logo-white" href="{{route('welcome')}}"><img src="{{url('/assets/images/logo-4.png')}}" alt="Logo"></a>
                     </div>
                     <!-- Header Logo End -->
 
                     <!-- Header Navigation Start -->
                     <div class="header-navigation d-none d-lg-block">
                         <ul class="main-menu">
-                            <li class="active-menu"><a href="#">Home</a>
+                            <li class="active-menu"><a href="{{route('welcome')}}">Home</a>
                             </li>
                             <li><a href="about.html">About</a></li>
                             <li><a href="#">Pages</a>
@@ -85,9 +87,26 @@
                     <!-- Header Meta Start -->
                     <div class="header-meta">
 
-                        <div class="header-btn d-none d-md-block">
-                            <a href="price.html" class="btn-2">Buy Ticket</a>
-                        </div>
+
+
+                        @if(auth()->check())
+                            <!-- User is authenticated (logged in) -->
+                            <form method="post" action="{{ route('logout') }}">
+                                @csrf
+                                <div class="header-btn d-none d-md-block">
+                                    <button type="submit" class="btn-2">Logout</button>
+                                </div>
+
+                            </form>
+                        @else
+                            <!-- User is not authenticated (not logged in) -->
+                            <div class="header-btn d-none d-md-block">
+                            <a href="{{ route('login') }}" class="btn-2">Buy Ticket</a>
+                            </div>
+                        @endif
+{{--                        <div class="header-btn d-none d-md-block">--}}
+{{--                            <a href="{{route('login')}}" class="btn-2">Buy Ticket</a>--}}
+{{--                        </div>--}}
 
                         <!-- Header Toggle Start -->
                         <div class="header-toggle d-lg-none">
@@ -111,62 +130,7 @@
     </div>
     <!-- Header End -->
 
-    <!-- Mini Cart Start -->
-    <div class="off-canvas">
-        <div class="icon-close"></div>
 
-        <!-- Mini Cart Box Start -->
-        <div class="meeta-mini-cart-box">
-
-            <div class="mini-cart-items">
-
-                <div class="mini-cart-item">
-                    <div class="mini-cart-item-image">
-                        <a href="#"><img src="../../public/assets/images/cart/cart-1.jpg" alt="Cart"></a>
-                    </div>
-                    <div class="mini-cart-item-content">
-                        <h4 class="mini-cart-title"><a href="#">Virtual Event with Protected Content and Hidden Livestream </a></h4>
-                        <p class="mini-cart-quantity">1 × $19.99</p>
-                    </div>
-                    <button class="btn-close"></button>
-                </div>
-
-                <div class="mini-cart-item">
-                    <div class="mini-cart-item-image">
-                        <a href="#"><img src="{{url('/assets/images/cart/cart-2.jpg')}}" alt="Cart"></a>
-                    </div>
-                    <div class="mini-cart-item-content">
-                        <h4 class="mini-cart-title"><a href="#">Virtual Event with Protected Content and Hidden Livestream </a></h4>
-                        <p class="mini-cart-quantity">1 × $19.99</p>
-                    </div>
-                    <button class="btn-close"></button>
-                </div>
-
-                <div class="mini-cart-item">
-                    <div class="mini-cart-item-image">
-                        <a href="#"><img src="{{url('/assets/images/cart/cart-3.jpg')}}" alt="Cart"></a>
-                    </div>
-                    <div class="mini-cart-item-content">
-                        <h4 class="mini-cart-title"><a href="#">Virtual Event with Protected Content and Hidden Livestream </a></h4>
-                        <p class="mini-cart-quantity">1 × $19.99</p>
-                    </div>
-                    <button class="btn-close"></button>
-                </div>
-
-            </div>
-
-            <div class="mini-cart-sub-total">
-                <p><strong>Subtotal:</strong> <span class="mini-cart-amount">$99.97</span></p>
-            </div>
-            <div class="mini-cart-sub-btn">
-                <a class="btn btn-primary" href="#">View cart</a>
-                <a class="btn btn-white" href="#">Checkout</a>
-            </div>
-        </div>
-        <!-- Mini Cart Box End -->
-
-    </div>
-    <!-- Mini Cart End -->
 
 
     <!-- Offcanvas Start-->
@@ -174,7 +138,7 @@
         <div class="offcanvas-header">
             <!-- Offcanvas Logo Start -->
             <div class="offcanvas-logo">
-                <a href="index.html"><img src="{{url('/assets/images/logo-4.png')}}" alt=""></a>
+                <a href="{{route('welcome')}}"><img src="{{url('/assets/images/logo-4.png')}}" alt=""></a>
             </div>
             <!-- Offcanvas Logo End -->
             <button type="button" class="close-btn" data-bs-dismiss="offcanvas"><i class="flaticon-close"></i></button>
@@ -184,37 +148,15 @@
         <div class="offcanvas-body">
             <div class="offcanvas-menu offcanvas-menu-2">
                 <ul class="main-menu">
-                    <li class="active-menu"><a href="#">Home</a>
-                        <ul class="sub-menu">
-                            <li><a href="index.html">Home 01</a></li>
-                            <li><a href="index-2.html">Home 02</a></li>
-                            <li><a href="index-3.html">Home 03</a></li>
-                            <li><a href="index-4.html">Home 04</a></li>
-                            <li><a class="active" href="index-5.html">Home 05</a></li>
-                            <li><a href="index-6.html">Home 06</a></li>
-                        </ul>
+                    <li class="active-menu"><a href="{{route('welcome')}}">Home</a>
+
                     </li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="#">Pages</a>
-                        <ul class="sub-menu">
-                            <li><a href="speaker-one.html">Speakers 01</a></li>
-                            <li><a href="speaker-.html">Speakers 02</a></li>
-                            <li><a href="speaker-single.html">Speaker Single</a></li>
-                            <li><a href="event-list.html">Event List</a></li>
-                            <li><a href="event-single.html">Event Single</a></li>
-                            <li><a href="schedule.html">Event Schedule</a></li>
-                            <li><a href="gallery.html">Gallery</a></li>
-                            <li><a href="price.html">Pricing</a></li>
-                            <li><a href="faq.html">FAQ's</a></li>
-                            <li><a href="login-register.html">Login Register</a></li>
-                        </ul>
+
                     </li>
                     <li><a href="#">Blog</a>
-                        <ul class="sub-menu">
-                            <li><a href="blog.html">Blog Grid</a></li>
-                            <li><a href="blog-standard.html">Latest News</a></li>
-                            <li><a href="blog-details.html">Blog Details</a></li>
-                        </ul>
+
                     </li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
@@ -260,13 +202,14 @@
 
                                     <div class="single-form">
                                         <label class="form-label"><i class="fas fa-map"></i> Location</label>
-                                        <select name="city">
+                                        <select name="city" >
                                             <option value="0">Select Location</option>
                                             @foreach($cities as $city)
                                                 <option value="{{ $city->id }}">{{ $city->ville }}</option>
                                             @endforeach
                                         </select>
                                     </div>
+
 
                                     <div class="form-btn">
                                         <button  class="search-btn"><i class="flaticon-loupe"></i> </button>
