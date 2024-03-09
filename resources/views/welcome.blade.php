@@ -247,7 +247,7 @@
                                     </div>
                                     <div class="single-form">
                                         <label class="form-label"><i class="fas fa-list-alt"></i> Category</label>
-                                        <select name="category">
+                                        <select name="category" id="categorySelect" onchange="redirectToCategory(this)">
                                             <option value="0">Select Category</option>
                                             @foreach($categories as $category)
                                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -592,6 +592,23 @@
 
     <!-- JS
     ============================================ -->
+
+    <script>
+        function redirectToCategory(selectElement) {
+            // Get the selected value
+            var selectedValue = selectElement.value;
+
+            // Check if a valid category is selected (not "Select Category")
+            if (selectedValue !== '0') {
+                // Build the URL using the route and selected category ID
+                // Redirect to the URL
+                window.location.href = "{{ route('events.category', ['categoryId' => ':categoryId']) }}".replace(':categoryId', selectedValue);
+            }
+        }
+    </script>
+
+
+
 
     <!-- Modernizer & jQuery JS -->
     <script src="{{ asset('assets/js/vendor/modernizr-3.11.7.min.js') }}"></script>

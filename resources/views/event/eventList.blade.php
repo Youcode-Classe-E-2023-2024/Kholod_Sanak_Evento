@@ -72,36 +72,15 @@
                         <div class="header-navigation">
                             <ul class="main-menu">
                                 <li><a href="#">Home</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="index.html">Home 01</a></li>
-                                        <li><a href="index-2.html">Home 02</a></li>
-                                        <li><a href="index-3.html">Home 03</a></li>
-                                        <li><a href="index-4.html">Home 04</a></li>
-                                        <li><a href="index-5.html">Home 05</a></li>
-                                        <li><a href="index-6.html">Home 06</a></li>
-                                    </ul>
+
                                 </li>
                                 <li><a href="about.html">About</a></li>
                                 <li class="active-menu"><a href="#">Pages</a>
-                                    <ul class="sub-menu">
-                                        <li><a class="active" href="event-list.html">Event List</a></li>
-                                        <li><a href="event-single.html">Event Single</a></li>
-                                        <li><a href="schedule.html">Event Schedule</a></li>
-                                        <li><a href="speaker-one.html">Speakers 01</a></li>
-                                        <li><a href="speaker-two.html">Speakers 02</a></li>
-                                        <li><a href="speaker-single.html">Speaker Single</a></li>
-                                        <li><a href="gallery.html">Gallery</a></li>
-                                        <li><a href="price.html">Pricing</a></li>
-                                        <li><a href="faq.html">FAQ's</a></li>
-                                        <li><a href="login-register.html">Login Register</a></li>
-                                    </ul>
+
                                 </li>
                                 <li><a href="#">Blog</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="blog.html">Blog Grid</a></li>
-                                        <li><a href="blog-standard.html">Latest News</a></li>
-                                        <li><a href="blog-details.html">Blog Details</a></li>
-                                    </ul>
+
+
                                 </li>
                                 <li><a href="contact.html">Contact</a></li>
                             </ul>
@@ -242,36 +221,14 @@
             <div class="offcanvas-menu offcanvas-menu-2">
                 <ul class="main-menu">
                     <li><a href="#">Home</a>
-                        <ul class="sub-menu">
-                            <li><a href="index.html">Home 01</a></li>
-                            <li><a href="index-2.html">Home 02</a></li>
-                            <li><a href="index-3.html">Home 03</a></li>
-                            <li><a href="index-4.html">Home 04</a></li>
-                            <li><a href="index-5.html">Home 05</a></li>
-                            <li><a href="index-6.html">Home 06</a></li>
-                        </ul>
+
                     </li>
                     <li><a href="about.html">About</a></li>
                     <li class="active-menu"><a href="#">Pages</a>
-                        <ul class="sub-menu">
-                            <li><a class="active" href="event-list.html">Event List</a></li>
-                            <li><a href="event-single.html">Event Single</a></li>
-                            <li><a href="schedule.html">Event Schedule</a></li>
-                            <li><a href="speaker-one.html">Speakers 01</a></li>
-                            <li><a href="speaker-two.html">Speakers 02</a></li>
-                            <li><a href="speaker-single.html">Speaker Single</a></li>
-                            <li><a href="gallery.html">Gallery</a></li>
-                            <li><a href="price.html">Pricing</a></li>
-                            <li><a href="faq.html">FAQ's</a></li>
-                            <li><a href="login-register.html">Login Register</a></li>
-                        </ul>
+
                     </li>
                     <li><a href="#">Blog</a>
-                        <ul class="sub-menu">
-                            <li><a href="blog.html">Blog Grid</a></li>
-                            <li><a href="blog-standard.html">Latest News</a></li>
-                            <li><a href="blog-details.html">Blog Details</a></li>
-                        </ul>
+
                     </li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
@@ -292,7 +249,10 @@
                         <div class="page-banner text-center">
                             <h2 class="title">Event List</h2>
                             <ul class="breadcrumb justify-content-center">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+
+                                @if(isset($category))
+                                    <li class="breadcrumb-item"><a href="{{ route('events.category', ['categoryId' => $category->id]) }}">{{ $category->name }}</a></li>
+                                @endif
                                 <li class="breadcrumb-item active" aria-current="page">Event List</li>
                             </ul>
                         </div>
@@ -413,7 +373,6 @@
                                 <!-- Event List Item End -->
                             @endforeach
 
-                            {{ $events->links() }}
 
 
 
@@ -422,8 +381,11 @@
                 </div>
                 <!-- Event List Content End -->
                 <div class="event-next-prev-btn text-center">
-                    <a class="event-btn" href="#"><i class="flaticon-back"></i> Previous</a>
-                    <a class="event-btn btn-next" href="#">Next <i class="flaticon-next"></i></a>
+{{--                    <a class="event-btn" href="#"><i class="flaticon-back"></i> Previous</a>--}}
+{{--                    <a class="event-btn btn-next" href="#">Next <i class="flaticon-next"></i></a>--}}
+
+                    <!-- Include pagination links -->
+                    {{ $events->links() }}
                 </div>
             </div>
         </div>
@@ -441,7 +403,7 @@
 
             <!-- Footer Logo Start -->
             <div class="footer-logo">
-                <a href="index.html"><img src="{{url('assets/images/footer-logo-1.png')}}" alt="Logo"></a>
+                <a href="{{route('welcome')}}"><img src="{{url('assets/images/footer-logo-1.png')}}" alt="Logo"></a>
             </div>
             <!-- Footer Logo End -->
 
