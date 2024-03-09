@@ -27,11 +27,11 @@
                     </div>
                     <div class="p-4 text-right">
                         <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Users Count</p>
-                        <h4 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{{ $userCount }} Editor</h4>
+                        <h4 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{{ $userCount }} Organizer</h4>
                     </div>
                     <div class="border-t border-blue-gray-50 p-4">
                         <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-                            <strong class="text-green-500">{{ $userCount1 }}</strong>&nbsp;Viewer
+                            <strong class="text-green-500">{{ $userCount1 }}</strong>&nbsp;Regular users
                         </p>
                     </div>
                 </div>
@@ -45,13 +45,13 @@
                         </svg>
                     </div>
                     <div class="p-4 text-right">
-                        <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Medias Count</p>
-{{--                        <h4 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{{$mediasCount}}</h4>--}}
+                        <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Events </p>
+                        <h4 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{{$approvedEvents}} Pub Events</h4>
                     </div>
                     <div class="border-t border-blue-gray-50 p-4">
-{{--                        <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">--}}
-{{--                            <strong class="text-green-500">+3%</strong>&nbsp;than last month--}}
-{{--                        </p>--}}
+                        <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
+                            <strong class="text-green-500">{{$pendingEvents}} </strong>Pending Events
+                        </p>
                     </div>
                 </div>
                 {{--                content end --}}
@@ -64,8 +64,8 @@
                         </svg>
                     </div>
                     <div class="p-4 text-right">
-                        <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Nbr of Subs</p>
-{{--                        <h4 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{{$subsCount}}</h4>--}}
+                        <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Categories</p>
+                        <h4 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{{$categories}}</h4>
                     </div>
                     <div class="border-t border-blue-gray-50 p-4">
                         <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
@@ -83,8 +83,8 @@
                         </svg>
                     </div>
                     <div class="p-4 text-right">
-                        <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Templates Count</p>
-{{--                        <h4 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{{$templateCount}}</h4>--}}
+                        <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Generated Tickets</p>
+                        <h4 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{{$tickets}}</h4>
                     </div>
                     <div class="border-t border-blue-gray-50 p-4">
                         <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
@@ -93,22 +93,95 @@
                     </div>
                 </div>
             </div>
-
- <div class="xl:h-screen">
-
  </div>
-        <div class="text-blue-gray-600">
-            <footer class="py-2">
-                <div class="flex w-full flex-wrap items-center justify-center gap-6 px-2 md:justify-between">
-                    <p class="block antialiased font-sans text-sm leading-normal font-normal text-inherit">© 2024, made with <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="-mt-0.5 inline-block h-3.5 w-3.5">
-                            <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"></path>
-                        </svg>
-                </div>
-            </footer>
-        </div>
-    </div>
-        </div>
-</div>
+            <!-- Include the ApexCharts library -->
+            <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+            <!-- ApexCharts section -->
+            <div id="chart"></div>
+
+            <script>
+                // Check if ApexCharts is loaded
+                if (typeof ApexCharts !== 'undefined') {
+                    // Example ApexCharts data
+                    var options = {
+                        series: [
+                            {
+                                name: 'Users',
+                                data: [{{$userCount}}],
+                            },
+                            {
+                                name: 'Organizers',
+                                data: [{{$userCount1}}],
+                            },
+                            {
+                                name: 'Published Events',
+                                data: [{{$approvedEvents}}],
+                            },
+                        ],
+                        chart: {
+                            type: 'bar',
+                            height: 350,
+                        },
+                        plotOptions: {
+                            bar: {
+                                vertical: true,
+                            },
+                        },
+                        xaxis: {
+                            categories: ['Count'],
+                        },
+                    };
+
+                    var chart = new ApexCharts(document.querySelector("#chart"), options);
+                    chart.render();
+                } else {
+                    console.error('ApexCharts library is not loaded.');
+                }
+            </script>
+
+            <!-- Include the ApexCharts library -->
+            <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+            <!-- ApexCharts section -->
+            <div id="chart"></div>
+
+            <script>
+                // Check if ApexCharts is loaded
+                if (typeof ApexCharts !== 'undefined') {
+                    // Extract organizer names and events count from PHP variable
+                    var organizers = {!! json_encode($eventsByOrganizers->pluck('name')) !!};
+                    var eventsCount = {!! json_encode($eventsByOrganizers->pluck('events_count')) !!};
+
+                    // Example ApexCharts data
+                    var options = {
+                        series: [{
+                            name: 'Events',
+                            data: eventsCount,
+                        }],
+                        chart: {
+                            type: 'bar',
+                            height: 350,
+                        },
+                        plotOptions: {
+                            bar: {
+                                vertical: true,
+                            },
+                        },
+                        xaxis: {
+                            categories: organizers,
+                        },
+                    };
+
+                    var chart = new ApexCharts(document.querySelector("#chart"), options);
+                    chart.render();
+                } else {
+                    console.error('ApexCharts library is not loaded.');
+                }
+            </script>
+
+
+
 
 </body>
 </html>

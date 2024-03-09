@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Event;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\EmailList;
@@ -113,31 +116,40 @@ class UserController extends Controller
     {
         // Retrieve the user count with the 'editor' role
         $userCount = User::whereHas('roles', function ($query) {
-            $query->where('name', 'editor');
+            $query->where('name', 'organizer');
         })->count();
 
         $userCount1 = User::whereHas('roles', function ($query) {
             $query->where('name', 'user');
         })->count();
 
-//        //sub & unsub count
-//        $subsCount = EmailList::where('status', '=', 'sub')->count();
-//        $unsubCount =  EmailList::where('status', '=', 'unsub')->count();
-//
-//        // Medias count
-//        $mediasCount = Medias::all()->count();
-//
-//        //Template count
-//        $templateCount= Newsletter::all()->count();
-//        //unsent
-//        $unsentCount= Newsletter::where('status', '=', 'not_sent')->count();
+       // Count pending events (status = 0)
+        $pendingEvents = Event::where('acceptation', 0)->count();
 
-//        // Pass the user count to the 'admin.dashboard' view
-//        return view('admin.dashboard', compact('userCount','userCount1','subsCount',
-//            'unsubCount','mediasCount','templateCount','unsentCount'));
-//    }
+         // Count approved events (acceptation = 1)
+        $approvedEvents = Event::where('acceptation', 1)->count();
 
-        return view('admin.dashboard', compact('userCount', 'userCount1'));
+        $categories= Category::all()->count();
+        $tickets= Ticket::all()->count();
+
+        //organizer created how many events
+        $users = User::all();
+
+        $eventsCount = [];
+
+        foreach ($users as $user) {
+            $eventsCount[$user->name] = $user->events()->count();
+        }
+
+        // Example query to get the count of events for each organizer
+        $eventsByOrganizers = User::withCount('events')->get();
+
+
+
+
+
+        return view('admin.dashboard', compact('userCount', 'userCount1','pendingEvents',
+            'approvedEvents','categories','tickets','eventsCount','eventsByOrganizers'));
     }
 
     public function editorDashboard(){
