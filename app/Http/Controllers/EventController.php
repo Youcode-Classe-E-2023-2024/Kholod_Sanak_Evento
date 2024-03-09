@@ -227,4 +227,26 @@ class EventController extends Controller
         return view('event.eventList', compact('category', 'events'));
     }
 
+    public function searchEvents(Request $request)
+    {
+        $titre = $request->input('titre');
+
+        $query = Event::query();
+
+//        if ($titre) {
+//            $query->where('titre', 'like', '%' . $titre . '%');
+//
+//        }
+
+        if ($titre) {
+            $query->where('titre', 'like', '%' . $titre . '%');
+        }
+
+        // Retrieve events based on the applied title filter
+        $events = $query->latest()->paginate(10);
+
+        return view('event.eventList', compact('events'));
+    }
+
+
 }
