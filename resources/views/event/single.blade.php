@@ -71,7 +71,7 @@
                         <!-- Header Navigation Start -->
                         <div class="header-navigation">
                             <ul class="main-menu">
-                                <li><a href="#">Home</a>
+                                <li><a href="{{route('welcome')}}">Home</a>
 
                                 </li>
                                 <li><a href="about.html">About</a></li>
