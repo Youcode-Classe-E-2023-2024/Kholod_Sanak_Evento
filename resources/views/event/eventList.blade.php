@@ -34,6 +34,8 @@
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="{{url('/assets/css/style.css')}}">
 
+
+
 </head>
 
 <body>
@@ -381,12 +383,13 @@
                 </div>
                 <!-- Event List Content End -->
                 <div class="event-next-prev-btn text-center">
-{{--                    <a class="event-btn" href="#"><i class="flaticon-back"></i> Previous</a>--}}
-{{--                    <a class="event-btn btn-next" href="#">Next <i class="flaticon-next"></i></a>--}}
-
-                    <!-- Include pagination links -->
                     {{ $events->links() }}
                 </div>
+
+                <div class="text-center">
+
+                </div>
+
             </div>
         </div>
     </div>
@@ -395,7 +398,7 @@
 </div>
 
 <!-- Footer Start -->
-<div class="meeta-footer-section" style="background-image: url(assets/images/bg/footer-bg.jpg);">
+<div class="meeta-footer-section" style="background-image: {{url('assets/images/bg/footer-bg.jpg')}};">
 
     <!-- Footer Widget Start -->
     <div class="footer-widget text-center">
