@@ -104,9 +104,7 @@
                             <a href="{{ route('login') }}" class="btn-2">Buy Ticket</a>
                             </div>
                         @endif
-{{--                        <div class="header-btn d-none d-md-block">--}}
-{{--                            <a href="{{route('login')}}" class="btn-2">Buy Ticket</a>--}}
-{{--                        </div>--}}
+
 
                         <!-- Header Toggle Start -->
                         <div class="header-toggle d-lg-none">
