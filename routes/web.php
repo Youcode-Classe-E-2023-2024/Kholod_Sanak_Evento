@@ -85,6 +85,13 @@ Route::get('events/{id}', [EventController::class, 'show'])->name('event.single'
 //ticket form
 Route::get('/ticketForm/{eventId}', [ReservationController::class, 'showPaymentForm'])->name('ticketForm');
 
+///
+///////////////////////////////                Events by category
+///
+//Route::get('events/by/category', [EventController::class, 'showEventByCategory'])->name('events.category');
+Route::get('/events/category/{categoryId}', [EventController::class, 'showEventByCategory'])
+    ->name('events.category');
+
 
 /*
 |--------------------------------------------------------------------------
