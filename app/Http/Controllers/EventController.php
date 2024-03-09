@@ -214,4 +214,17 @@ class EventController extends Controller
         return view('event.single', compact('event'));
     }
 
+    public function showEventByCategory($categoryId)
+    {
+        // Find the category by ID
+        $category = Category::findOrFail($categoryId);
+
+        // Retrieve events belonging to the specified category
+        $events = Event::where('category_id', $categoryId)
+            ->latest()
+            ->paginate(2);
+
+        return view('event.eventList', compact('category', 'events'));
+    }
+
 }
