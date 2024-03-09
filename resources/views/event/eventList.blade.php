@@ -116,9 +116,22 @@
                                 </div>
                             </div>
 
-                            <div class="header-btn d-none d-md-block">
-                                <a href="price.html" class="btn btn-3 btn-primary">Buy Ticket Now</a>
-                            </div>
+                            @if(auth()->check())
+                                <!-- User is authenticated (logged in) -->
+                                <form method="post" action="{{ route('logout') }}">
+                                    @csrf
+                                    <div class="header-btn d-none d-md-block">
+                                        <button type="submit" class="btn-2">Logout</button>
+                                    </div>
+
+                                </form>
+                            @else
+                                <!-- User is not authenticated (not logged in) -->
+                                <div class="header-btn d-none d-md-block">
+                                    <a href="{{ route('login') }}" class="btn-2">Buy Ticket</a>
+                                </div>
+                            @endif
+
 
                             <!-- Header Toggle Start -->
                             <div class="header-toggle d-md-none">
