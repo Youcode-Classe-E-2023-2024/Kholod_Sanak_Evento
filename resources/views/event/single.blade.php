@@ -99,9 +99,10 @@
                                             <div class="search-inner">
                                                 <i id="search-close" class="flaticon-close search-close"></i>
                                                 <div class="search-cell">
-                                                    <form action="#">
+                                                    <form action="{{ route('events.search') }}" method="GET">
+                                                        @csrf
                                                         <div class="search-field-holder">
-                                                            <input class="main-search-input" type="search" placeholder="Search Your Keyword...">
+                                                            <input name="titre" class="main-search-input" type="search" placeholder="Search Your Keyword...">
                                                         </div>
                                                     </form>
                                                 </div>
@@ -111,9 +112,22 @@
                                 </div>
                             </div>
 
-                            <div class="header-btn d-none d-md-block">
-                                <a href="price.html" class="btn btn-3 btn-primary">Buy Ticket Now</a>
-                            </div>
+                            @if(auth()->check())
+                                <!-- User is authenticated (logged in) -->
+                                <form method="post" action="{{ route('logout') }}">
+                                    @csrf
+                                    <div class="header-btn d-none d-md-block">
+                                        <button type="submit" class="btn-2">Logout</button>
+                                    </div>
+
+                                </form>
+                            @else
+                                <!-- User is not authenticated (not logged in) -->
+                                <div class="header-btn d-none d-md-block">
+                                    <a href="{{ route('login') }}" class="btn-2">Buy Ticket</a>
+                                </div>
+                            @endif
+
 
                             <!-- Header Toggle Start -->
                             <div class="header-toggle d-md-none">
