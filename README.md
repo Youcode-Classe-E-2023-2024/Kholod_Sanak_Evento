@@ -10,7 +10,7 @@ La société "Evento" ambitionne de développer une plateforme novatrice dédié
 - **Connexion :** Les utilisateurs peuvent se connecter à leur compte en utilisant leurs identifiants.
 - **Réinitialisation de mot de passe :** En cas d'oubli, les utilisateurs peuvent réinitialiser leur mot de passe en recevant un e-mail de réinitialisation.
 - **Exploration d'événements :** Les utilisateurs peuvent consulter la liste des événements disponibles sur la plateforme avec pagination pour faciliter la navigation.
-- **Filtrage par catégorie :** Les utilisateurs peuvent filtrer les événements par catégorie.
+- **Filtrage par catégorie et ville :** Les utilisateurs peuvent filtrer les événements par catégorie et par ville.
 - **Recherche :** Les utilisateurs peuvent rechercher des événements par titre.
 - **Consultation des détails d'événements :** Les utilisateurs peuvent visualiser les détails d'un événement, y compris sa description, sa date, son lieu et le nombre de places disponibles.
 - **Réservation :** Les utilisateurs peuvent réserver une place pour un événement.
