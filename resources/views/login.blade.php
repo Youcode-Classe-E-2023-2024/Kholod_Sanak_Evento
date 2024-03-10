@@ -53,100 +53,71 @@
     <!-- Preloader End -->
 
     <!-- Header Start -->
-    <div class="meeta-header-section meeta-header-4">
+    <div class="meeta-header-section meeta-header-2 meeta-header-3 meeta-header-5">
 
         <!-- Header Middle Start -->
         <div class="header-middle header-sticky">
-            <div class="container-fluid custom-container">
+            <div class="container">
 
-                <div class="row align-items-center">
-                    <div class="col-lg-3 col-4">
-
-                        <!-- Header Logo Start -->
-                        <div class="header-logo">
-                            <a href="{{route('welcome')}}"><img src="{{url('assets/images/logo-4.png')}}" alt="Logo"></a>
-                        </div>
-                        <!-- Header Logo End -->
-
+                <div class="header-wrap">
+                    <!-- Header Logo Start -->
+                    <div class="header-logo header-logo-3">
+                        <a class="logo-black" href="{{route('welcome')}}"><img src="{{url('/assets/images/logo-3.png')}}" alt="Logo"></a>
+                        <a class="logo-white" href="{{route('welcome')}}"><img src="{{url('/assets/images/logo-4.png')}}" alt="Logo"></a>
                     </div>
-                    <div class="col-lg-6 d-none d-lg-block">
+                    <!-- Header Logo End -->
 
-                        <!-- Header Navigation Start -->
-                        <div class="header-navigation">
-                            <ul class="main-menu">
-                                <li><a href="{{route('welcome')}}">Home</a>
-
-                                </li>
-                                <li><a href="about.html">About</a></li>
-                                <li class="active-menu"><a href="#">Pages</a>
-
-                                </li>
-                                <li><a href="#">Blog</a>
+                    <!-- Header Navigation Start -->
+                    <div class="header-navigation d-none d-lg-block">
+                        <ul class="main-menu">
+                            <li ><a href="{{route('welcome')}}">Home</a>
+                            </li>
 
 
-                                </li>
-                                <li><a href="contact.html">Contact</a></li>
-                            </ul>
-                        </div>
-                        <!-- Header Navigation End -->
+                            </li>
+                            <li class="active-menu"><a  href="{{route('login')}}">Login</a>
 
+                            </li>
+                            <li><a href="{{route('register')}}">Register</a>
+                        </ul>
                     </div>
-                    <div class="col-lg-3 col-8">
+                    <!-- Header Navigation End -->
 
-                        <!-- Header Meta Start -->
-                        <div class="header-meta">
+                    <!-- Header Meta Start -->
+                    <div class="header-meta">
 
-                            <div class="header-actions">
-                                <div class="header-action d-none d-sm-block">
-                                    <div class="header-search">
-                                        <a class="search-btn" href="#"><i class="flaticon-loupe"></i></a>
-                                        <div class="search-wrap">
-                                            <div class="search-inner">
-                                                <i id="search-close" class="flaticon-close search-close"></i>
-                                                <div class="search-cell">
-                                                    <form action="{{ route('events.search') }}" method="GET">
-                                                        @csrf
-                                                        <div class="search-field-holder">
-                                                            <input name="titre" class="main-search-input" type="search" placeholder="Search Your Keyword...">
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
-                            @if(auth()->check())
-                                <!-- User is authenticated (logged in) -->
-                                <form method="post" action="{{ route('logout') }}">
-                                    @csrf
-                                    <div class="header-btn d-none d-md-block">
-                                        <button type="submit" class="btn-2">Logout</button>
-                                    </div>
 
-                                </form>
-                            @else
-                                <!-- User is not authenticated (not logged in) -->
+                        @if(auth()->check())
+                            <!-- User is authenticated (logged in) -->
+                            <form method="post" action="{{ route('logout') }}">
+                                @csrf
                                 <div class="header-btn d-none d-md-block">
-                                    <a href="{{ route('login') }}" class="btn-2">Buy Ticket</a>
+                                    <button type="submit" class="btn-2">Logout</button>
                                 </div>
-                            @endif
 
-                            <!-- Header Toggle Start -->
-                            <div class="header-toggle d-md-none">
-                                <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </button>
+                            </form>
+                        @else
+                            <!-- User is not authenticated (not logged in) -->
+                            <div class="header-btn d-none d-md-block">
+                                <a href="{{ route('login') }}" class="btn-2">Buy Ticket</a>
                             </div>
-                            <!-- Header Toggle End -->
+                        @endif
 
+
+                        <!-- Header Toggle Start -->
+                        <div class="header-toggle d-lg-none">
+                            <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </button>
                         </div>
-                        <!-- Header Meta End -->
+                        <!-- Header Toggle End -->
 
                     </div>
+                    <!-- Header Meta End -->
+
                 </div>
 
             </div>

@@ -72,14 +72,13 @@
                         <ul class="main-menu">
                             <li class="active-menu"><a href="{{route('welcome')}}">Home</a>
                             </li>
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="#">Pages</a>
+
 
                             </li>
-                            <li><a href="#">Blog</a>
+                            <li><a href="{{route('login')}}">Login</a>
 
                             </li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="{{route('register')}}">Register</a>
                         </ul>
                     </div>
                     <!-- Header Navigation End -->
@@ -149,14 +148,12 @@
                     <li class="active-menu"><a href="{{route('welcome')}}">Home</a>
 
                     </li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="#">Pages</a>
 
                     </li>
-                    <li><a href="#">Blog</a>
+                    <li><a href="{{route('login')}}">Login</a>
 
                     </li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="{{route('register')}}">Register</a>
                 </ul>
             </div>
         </div>
@@ -181,7 +178,7 @@
                         <div class="search-form-wrap" data-aos-delay="900" data-aos="fade-up">
                             <div class="search-form-inner">
 
-{{--                                search form--}}
+                                {{--                                search form--}}
                                 <form class="search-form" action="{{ route('events.search') }}" method="GET">
                                     @csrf
                                     <div class="single-form">
@@ -496,8 +493,8 @@
                         <li><a href="about.html">About Us</a></li>
                         <li><a href="speaker-single.html">Speaker</a></li>
                         <li><a href="event-single.html">Sponsor</a></li>
-                        <li><a href="blog.html">Blog </a></li>
-                        <li><a href="contact.html"> Contact</a></li>
+                        <li><a href="{{route('login')}}">Login</a>
+                        <li><a href="{{route('register')}}">Register</a>
                     </ul>
                 </div>
 
