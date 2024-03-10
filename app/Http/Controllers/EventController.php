@@ -32,11 +32,6 @@ class EventController extends Controller
     }
 
 
-    public function stat(){
-        $events = Event::all()->count();
-    }
-
-
 
     public function showEventForm()
     {
@@ -178,7 +173,7 @@ class EventController extends Controller
     |--------------------------------------------------------------------------
     */
     public function aprroveEvent(){
-        $events = Event::where('status', 0)->latest()->paginate(10);
+        $events = Event::where('acceptation', 0)->latest()->paginate(10);
 
         return view('admin.events',[
             'events'=>$events
