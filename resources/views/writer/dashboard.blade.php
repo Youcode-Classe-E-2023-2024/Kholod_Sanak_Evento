@@ -18,7 +18,7 @@
 
         <div class="mt-12">
             <div class="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
-                {{--content 1 start--}}
+                {{--My events  start--}}
                 <div class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
                     <div class="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-blue-600 to-blue-400 text-white shadow-blue-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="w-6 h-6 text-white">
@@ -28,16 +28,16 @@
                         </svg>
                     </div>
                     <div class="p-4 text-right">
-                        <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Subs Count</p>
-                        <h4 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900"></h4>
+                        <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">My Events</p>
+                        <h4 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{{ $approvedEvents }} Approved</h4>
                     </div>
                     <div class="border-t border-blue-gray-50 p-4">
                         <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-{{--                            <strong class="text-green-500">{{$subsCount}}</strong>&nbsp;--}}
+                            <strong class="text-green-500">{{$pendingEvents}} </strong>Pending
                         </p>
                     </div>
                 </div>
-{{--               unsub count--}}
+{{--               Souldout events--}}
                 <div class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
                     <div class="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-green-600 to-green-400 text-white shadow-green-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="w-6 h-6 text-white">
@@ -45,33 +45,77 @@
                         </svg>
                     </div>
                     <div class="p-4 text-right">
-                        <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Unsub Count</p>
+                        <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Sold Out Events</p>
                         <h4 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900"></h4>
                     </div>
                     <div class="border-t border-blue-gray-50 p-4">
                         <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-{{--                            <strong class="text-red-500">{{$unsubCount}}</strong>&nbsp;--}}
+                            <strong class="text-red-500">{{$soldOutEvents}}</strong> Event
+                        </p>
+                    </div>
+                </div>
+{{--                highest event reservation--}}
+                <div class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
+                    <div class="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-yellow-600 to-yellow-400 text-white shadow-orange-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="w-6 h-6 text-white">
+                            <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75zM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 01-1.875-1.875V8.625zM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 013 19.875v-6.75z"></path>
+                        </svg>
+                    </div>
+                    <div class="p-4 text-right">
+                        <p class="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Top Events</p>
+                        <h4 class="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{{ $reservationCount }} Reservations</h4>
+                    </div>
+                    <div class="border-t border-blue-gray-50 p-4">
+                        <p class="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
+{{--                            <strong class="text-green-500">{{ $eventName }}</strong>&nbsp;--}}
                         </p>
                     </div>
                 </div>
 
             </div>
 
-            <div class="xl:h-screen">
 
-            </div>
-            <div class="text-blue-gray-600">
-                <footer class="py-2">
-                    <div class="flex w-full flex-wrap items-center justify-center gap-6 px-2 md:justify-between">
-                        <p class="block antialiased font-sans text-sm leading-normal font-normal text-inherit">© 2024, made with <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="-mt-0.5 inline-block h-3.5 w-3.5">
-                                <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"></path>
-                            </svg>
-                    </div>
-                </footer>
-            </div>
-        </div>
-    </div>
+
 </div>
+
+        <!-- your.tickets.chart.view.blade.php -->
+
+        <div id="userTicketsChart"></div>
+
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <script>
+            var options = {
+                series: [{
+                    name: 'Tickets',
+                    data: {!! json_encode(array_column($ticketData, 'ticket_count')) !!}
+                }],
+                chart: {
+                    type: 'bar',
+                    height: 350,
+                },
+                xaxis: {
+                    categories: {!! json_encode(array_column($ticketData, 'event_name')) !!}
+                },
+                title: {
+                    text: 'Events Created by Each Organizer',
+                    align: 'center',
+                    margin: 10,
+                    offsetX: 0,
+                    offsetY: 0,
+                    floating: false,
+                    style: {
+                        fontSize: '16px',
+                        fontWeight: 'bold',
+                        fontFamily: 'Helvetica, Arial, sans-serif',
+                        color: '#263238' // Set the color as per your design
+                    },
+                }
+            };
+
+            var chart = new ApexCharts(document.querySelector("#userTicketsChart"), options);
+            chart.render();
+        </script>
+
 
 </body>
 </html>
