@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Event;
+use App\Models\Reservation;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -12,7 +13,7 @@ use App\Models\Medias;
 use App\Models\Newsletter;
 
 
-
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 
 
@@ -141,11 +142,59 @@ class UserController extends Controller
             'approvedEvents','categories','tickets','eventsByOrganizers'));
     }
 
-    ///////////////////////////            admin dashboard view
+    ///////////////////////////            Organizer dashboard view
     ///
 
     public function editorDashboard(){
 
-        return view('writer.dashboard');
+        $user = Auth::user();
+
+        if ($user) {
+            // Count pending events for the user (status = 0)
+            $pendingEvents = $user->events()->where('acceptation', 0)->count();
+
+            // Count approved events for the user (acceptation = 1)
+            $approvedEvents = $user->events()->where('acceptation', 1)->count();
+        } else {
+            $pendingEvents = 0;
+            $approvedEvents = 0;
+        }
+
+        $soldOutEvents = auth()->user()->events()
+            ->where('acceptation', 1)
+            ->where('nombre_place', 0)
+            ->count();
+
+        // Get the event with the highest number of reservations for the authenticated user
+        $topEvent = auth()->user()->events()
+            ->select('events.*')
+            ->selectSub(
+                Reservation::selectRaw('count(*)')
+                    ->whereColumn('event_id', 'events.id'),
+                'reservations_count'
+            )
+            ->orderByDesc('reservations_count')
+            ->first();
+
+        // Access the count of reservations for the top event
+        $reservationCount = optional($topEvent)->reservations_count ?? 0;
+
+
+        //the number of generated tickets for each event
+        $user = Auth::user();
+        $events = $user->events;
+
+        $ticketData = [];
+
+        foreach ($events as $event) {
+            $ticketData[] = [
+                'event_name' => $event->titre,
+                'ticket_count' => Ticket::where('event_id', $event->id)->count(),
+            ];
+        }
+
+        return view('writer.dashboard',compact('ticketData','pendingEvents','approvedEvents','soldOutEvents','reservationCount'));
     }
+
+
 }
