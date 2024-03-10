@@ -197,12 +197,13 @@
 
                                     <div class="single-form">
                                         <label class="form-label"><i class="fas fa-map"></i> Location</label>
-                                        <select name="city" >
+                                        <select name="city" class="form-select" style="max-height: 50px; overflow-y: auto;">
                                             <option value="0">Select Location</option>
                                             @foreach($cities as $city)
                                                 <option value="{{ $city->id }}">{{ $city->ville }}</option>
                                             @endforeach
                                         </select>
+
                                     </div>
 
 
@@ -278,7 +279,10 @@
                                             </div>
                                         </div>
                                         <div class="featured-content">
-                                            <span class="category color-{{ $event->category->id }}">{{ $event->category->name }}</span>
+
+
+                                            <span class="category color-3">{{ $event->category->name }}</span>
+
                                             <h3 class="title">{{ $event->titre }}</h3>
                                             <span class="meta"><i class="fas fa-map-marker-alt"></i> {{ $event->lieu->ville }}</span>
                                         </div>
@@ -349,7 +353,8 @@
                                         <!-- Countdown End -->
                                     </div>
                                 </div>
-                                <a class="btn-2" href="price.html">Book Your Seat</a>
+
+                                <a class="btn-2" href="#">Book Your Seat</a>
                             </div>
                         </div>
                     </div>
@@ -483,7 +488,7 @@
 
                 <!-- Footer Logo Start -->
                 <div class="footer-logo">
-                    <a href="index.html"><img src="{{url('/assets/images/footer-logo-1.png')}}" alt="Logo"></a>
+                    <a href="{{route('welcome')}}"><img src="{{url('/assets/images/footer-logo-1.png')}}" alt="Logo"></a>
                 </div>
                 <!-- Footer Logo End -->
 

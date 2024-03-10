@@ -16,12 +16,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="../../../css2?family=Big+Shoulders+Display:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="../../../css?family=Archivo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 
     <!-- CSS
 	============================================ -->
 
     <!-- Icon Font CSS -->
-    <link rel="stylesheet" href="{{url('/assets/css/all.min.css')}}">
+{{--    <link rel="stylesheet" href="{{url('/assets/css/all.min.css')}}">--}}
     <link rel="stylesheet" href="{{url('/assets/css/flaticon.css')}}">
 
     <!-- Plugins CSS -->
@@ -272,18 +274,13 @@
                     <!-- List Collapse Start -->
                     <div class="collapse" id="collapseFilters">
                         <div class="event-list-tag">
-                            <ul>
-                                <li><a href="#">Featured Event</a></li>
-                                <li><a href="#">Upcoming</a></li>
-                                <li><a href="#">Organizers</a></li>
-                                <li><a href="#">Day</a></li>
-                                <li><a href="#">Price</a></li>
-                            </ul>
+
                         </div>
                     </div>
                     <!-- List Collapse End -->
                 </div>
                 <!-- Event List Top Bar End -->
+
                 <!-- Event List Bottom Bar Start -->
                 <div class="event-list-bottom-bar">
                     <div class="event-list-btn">
@@ -292,6 +289,7 @@
                     </div>
                 </div>
                 <!-- Event List Bottom Bar End -->
+
                 <!-- Event List Content Start -->
                 <div class="event-list-content-wrap">
                     <div class="tab-content">
@@ -307,7 +305,7 @@
                                     </div>
                                     <div class="event-list-content">
                                         <div class="event-price">
-                                            <span class="price">${{ $event->prix }}</span>
+                                            <span class="price">{{ $event->prix }} Dhs</span>
                                         </div>
                                         <h3 class="title"><a href="{{ route('event.single', $event->id) }}">{{ $event->titre }}</a></h3>
                                         <div class="meta-data">
@@ -319,25 +317,16 @@
                                         </div>
                                         <a class="ticket-link" href="{{ route('event.single', $event->id) }}">Get Ticket Now</a>
                                     </div>
-{{--                                    <span class="event-time"><span>{{ $event->formattedTime }}</span>{{ $event->timePeriod }}</span>--}}
                                 </div>
-                                <!-- Event List Item End -->
                             @endforeach
-
-
-
-
+                            <!-- Event List Item End -->
+                                <div class="event-next-prev-btn text-center">
+                                    {{ $events->links() }}
+                                </div>
                         </div>
                     </div>
                 </div>
                 <!-- Event List Content End -->
-                <div class="event-next-prev-btn text-center">
-                    {{ $events->links() }}
-                </div>
-
-                <div class="text-center">
-
-                </div>
 
             </div>
         </div>

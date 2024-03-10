@@ -61,7 +61,7 @@
 
                         <!-- Header Logo Start -->
                         <div class="header-logo">
-                            <a href="index.html"><img src="{{url('assets/images/logo-4.png')}}" alt="Logo"></a>
+                            <a href="{{route('welcome')}}"><img src="{{url('assets/images/logo-4.png')}}" alt="Logo"></a>
                         </div>
                         <!-- Header Logo End -->
 
@@ -220,13 +220,13 @@
                             </div>
                             <p>{{ $event->description }}</p>
                             <div class="event-single-item">
-                                <h3 class="title">Event Speakers</h3>
+                                <h3 class="title">Event Organizer</h3>
                                 <div class="speakers-content-wrap">
                                     <div class="row">
                                             <div class="col-md-4 col-sm-6">
                                                 <div class="single-speker-3">
                                                     <div class="speker-img">
-{{--                                                        <a href="{{ route('speaker.single', ['id' => $speaker->id]) }}"><img src="{{ $speaker->image_url }}" alt="{{ $speaker->name }}"></a>--}}
+                                                       <div> {{$event->organizer->name}}</div>
                                                         <div class="speker-content text-center">
                                                             <h3 class="name">{{ $event->lieu->ville }}</h3>
                                                             <span class="designation">{{ $event->deadline}}</span>
@@ -309,7 +309,7 @@
 
             <!-- Footer Logo Start -->
             <div class="footer-logo">
-                <a href="index.html"><img src="{{url('assets/images/footer-logo-1.png')}}" alt="Logo"></a>
+                <a href="{{route('welcome')}}"><img src="{{url('assets/images/footer-logo-1.png')}}" alt="Logo"></a>
             </div>
             <!-- Footer Logo End -->
 
