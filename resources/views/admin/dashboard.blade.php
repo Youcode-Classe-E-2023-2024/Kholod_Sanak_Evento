@@ -143,8 +143,10 @@
             <!-- Include the ApexCharts library -->
             <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
+
+
             <!-- ApexCharts section -->
-            <div id="chart1"></div>
+            <div class="mt-5" id="chart1"></div>
 {{-- how many events an organizer have created--}}
             <!-- Include the ApexCharts library -->
             <script>
@@ -172,7 +174,21 @@
                                     position: 'bottom'
                                 }
                             }
-                        }]
+                        }],
+                        title: {
+                            text: 'Tickets Generated for Each Event',
+                            align: 'center',
+                            margin: 10,
+                            offsetX: 0,
+                            offsetY: 0,
+                            floating: false,
+                            style: {
+                                fontSize: '16px',
+                                fontWeight: 'bold',
+                                fontFamily: 'Helvetica, Arial, sans-serif',
+                                color: '#263238' // Set the color as per your design
+                            },
+                        }
                     };
 
                     var chart = new ApexCharts(document.querySelector("#chart1"), options);
