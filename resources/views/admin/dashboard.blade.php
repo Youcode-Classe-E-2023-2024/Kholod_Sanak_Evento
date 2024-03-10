@@ -144,8 +144,9 @@
             <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
             <!-- ApexCharts section -->
-            <div id="chart"></div>
-
+            <div id="chart1"></div>
+{{-- how many events an organizer have created--}}
+            <!-- Include the ApexCharts library -->
             <script>
                 // Check if ApexCharts is loaded
                 if (typeof ApexCharts !== 'undefined') {
@@ -155,30 +156,32 @@
 
                     // Example ApexCharts data
                     var options = {
-                        series: [{
-                            name: 'Events',
-                            data: eventsCount,
-                        }],
+                        series: eventsCount,
                         chart: {
-                            type: 'bar',
+                            type: 'donut',
                             height: 350,
                         },
-                        plotOptions: {
-                            bar: {
-                                vertical: true,
-                            },
-                        },
-                        xaxis: {
-                            categories: organizers,
-                        },
+                        labels: organizers,
+                        responsive: [{
+                            breakpoint: 480,
+                            options: {
+                                chart: {
+                                    width: 200
+                                },
+                                legend: {
+                                    position: 'bottom'
+                                }
+                            }
+                        }]
                     };
 
-                    var chart = new ApexCharts(document.querySelector("#chart"), options);
+                    var chart = new ApexCharts(document.querySelector("#chart1"), options);
                     chart.render();
                 } else {
                     console.error('ApexCharts library is not loaded.');
                 }
             </script>
+
 
 
 
