@@ -52,4 +52,9 @@ class Event extends Model implements HasMedia
         return $this->hasMany(Reservation::class);
     }
 
+    public function organizer()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
 }
