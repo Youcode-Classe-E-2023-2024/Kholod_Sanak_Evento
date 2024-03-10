@@ -111,7 +111,9 @@ class UserController extends Controller
 
 
 
-    //admin dashboard view
+    ///////////////////////////               admin dashboard view
+    ///
+    ///
     public function adminDashboard()
     {
         // Retrieve the user count with the 'editor' role
@@ -132,31 +134,18 @@ class UserController extends Controller
         $categories= Category::all()->count();
         $tickets= Ticket::all()->count();
 
-        //organizer created how many events
-        $users = User::all();
-
-        $eventsCount = [];
-
-        foreach ($users as $user) {
-            $eventsCount[$user->name] = $user->events()->count();
-        }
-
-        // Example query to get the count of events for each organizer
-        $eventsByOrganizers = User::withCount('events')->get();
-
-
-
-
+        //organizer created how many events (both published and pending)
+        $eventsByOrganizers = User::role('organizer')->withCount('events')->get();
 
         return view('admin.dashboard', compact('userCount', 'userCount1','pendingEvents',
-            'approvedEvents','categories','tickets','eventsCount','eventsByOrganizers'));
+            'approvedEvents','categories','tickets','eventsByOrganizers'));
     }
 
+    ///////////////////////////            admin dashboard view
+    ///
+
     public function editorDashboard(){
-        //sub & unsub count
-//        $subsCount = EmailList::where('status', '=', 'sub')->count();
-//        $unsubCount =  EmailList::where('status', '=', 'unsub')->count();
-//        return view('writer.dashboard', compact('subsCount', 'unsubCount'));
+
         return view('writer.dashboard');
     }
 }
