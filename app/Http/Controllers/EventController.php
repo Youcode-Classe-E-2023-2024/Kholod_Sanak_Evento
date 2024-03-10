@@ -229,6 +229,18 @@ class EventController extends Controller
         return view('event.eventList', compact('category', 'events'));
     }
 
+    public function showEventByCity($cityId)
+    {
+        // Find the city by ID
+        $city = Lieu::findOrFail($cityId);
+
+        // Retrieve events belonging to the specified city
+        $events = Event::where('ville_id', $cityId)
+            ->latest()
+            ->paginate(2);
+
+        return view('event.eventList', compact('city', 'events'));
+    }
 
     public function searchEvents(Request $request)
     {

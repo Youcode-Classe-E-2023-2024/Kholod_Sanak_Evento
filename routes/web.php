@@ -92,6 +92,9 @@ Route::get('/ticketForm/{eventId}', [ReservationController::class, 'showPaymentF
 //Route::get('events/by/category', [EventController::class, 'showEventByCategory'])->name('events.category');
 Route::get('/events/category/{categoryId}', [EventController::class, 'showEventByCategory'])
     ->name('events.category');
+///////////////////////////////                Events by city
+///
+Route::get('/events/city/{cityId}', [EventController::class,'showEventByCity'])->name('events.city');
 
 
 

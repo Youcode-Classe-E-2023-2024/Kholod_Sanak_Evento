@@ -197,13 +197,12 @@
 
                                     <div class="single-form">
                                         <label class="form-label"><i class="fas fa-map"></i> Location</label>
-                                        <select name="city" class="form-select" style="max-height: 50px; overflow-y: auto;">
+                                        <select name="city" id="citySelect" onchange="redirectToCity(this)">
                                             <option value="0">Select Location</option>
                                             @foreach($cities as $city)
                                                 <option value="{{ $city->id }}">{{ $city->ville }}</option>
                                             @endforeach
                                         </select>
-
                                     </div>
 
 
@@ -549,6 +548,20 @@
                 // Build the URL using the route and selected category ID
                 // Redirect to the URL
                 window.location.href = "{{ route('events.category', ['categoryId' => ':categoryId']) }}".replace(':categoryId', selectedValue);
+            }
+        }
+    </script>
+
+    <script>
+        function redirectToCity(selectElement) {
+            // Get the selected value
+            var selectedValue = selectElement.value;
+
+            // Check if a valid city is selected (not "Select Location")
+            if (selectedValue !== '0') {
+                // Build the URL using the route and selected city ID
+                // Redirect to the URL
+                window.location.href = "{{ route('events.city', ['cityId' => ':cityId']) }}".replace(':cityId', selectedValue);
             }
         }
     </script>
